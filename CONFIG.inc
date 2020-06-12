@@ -7,7 +7,7 @@ PROJECTSDIR="$PACKAGE/"
 VERSIONFILE="ModuleManagerWatchDog.version"
 
 GD_DLLS="ModuleManagerWatchDog"
-GD_PRIORITY="zzz"
+GD_PRIORITY="666"
 DLLS=""
 
 

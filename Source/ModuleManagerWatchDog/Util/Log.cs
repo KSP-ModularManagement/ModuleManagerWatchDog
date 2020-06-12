@@ -25,12 +25,12 @@ namespace ModuleManagerWatchDog
 	{
 		internal static void force(string msg, params object[] @params)
 		{
-			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog]" + msg, @params);
+			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog] " + msg, @params);
 		}
 
 		internal static void info(string msg, params object[] @params)
 		{
-			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog] INFO: ß" + msg, @params);
+			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog] INFO: " + msg, @params);
 		}
 
 		internal static void detail(string msg, params object[] @params)
