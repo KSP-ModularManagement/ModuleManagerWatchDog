@@ -1,6 +1,6 @@
 # Module Manager Watch Dog :: Known Issues
 
-This is a troubleshot list to help you fixing your instalment.
+This is a troubleshooting list to help you on fixing your instalment.
 
 
 ## Known detectable problems
@@ -15,19 +15,17 @@ Check `GameData/` for DLLs with the name "ModuleManagerWatchDog" on it and delet
 
 ### "There's no Module Manager on this KSP instalment!"
 
-Well, you need to install Module Manager! :) See the "How-To" below.
-
-Check `GameData/` for DLLs with the name "ModuleManager" on it and delete all of them - but the newest one.
+Oukey, you need to install Module Manager! :) See the "How-To" below.
 
 ###  "There're more than one Module Manager on this KSP instalment!"
 
-Unfortunately, from KSP 1.8.0 and above a fatal bug is affecting Module Manager when mode then one MM dll is installed on your system, what renders Module Manager choosing to use the **oldest** version to be used. This caused some problems to TweakScale at least one.
+Unfortunately, from KSP 1.8.0 and above a fatal bug is affecting Module Manager when more then one MM dll is installed on your system, what renders Module Manager choosing to use the **oldest** version to be used. This caused some problems to TweakScale at least once.
 
-There's no other solution available but to **DELETE** all redundant copies of Module Manager, leaving only one on the GameData. 
+There's no other solution available but to manually **DELETE** all redundant copies of Module Manager, leaving only one on the GameData. 
 
 This was diagnosed on [TweakScale's thread](https://forum.kerbalspaceprogram.com/index.php?/topic/179030-ksp-141-tweakscale-under-lisias-management-24314-2020-0519/&do=findComment&comment=3797945).
 
-## How-To install Module Manager
+## How-To Install Module Manager
 
 You have two options, each one with advantages and drawbacks.
 
@@ -36,10 +34,10 @@ You have two options, each one with advantages and drawbacks.
 This is my personal fork of Module Manager, aiming to fix some non functional bugs while keeping compatibility with the original Module Manager.
 
 * Advantages
-	+ Slightly faster, mainly on systems with less memory
+	+ Slightly faster, mainly on systems with less memory available and a lot of patches.
 	+ Way better logging
-		- But still lacking a thing or two. 
-	+ Some fix from small annoyances or bugs, as long it doesn't breaks compatibility with the upstream. 
+		- But still lacking some features. 
+	+ Some fixes from small annoyances or bugs, as long they doesn't break compatibility with the upstream. 
 	+ It works on every KSP Version from 1.4.x to the latest
 		- KSP 1.3.1 and 1.2.2 are work in progress, to be released soon.
 * Disadvantages
@@ -60,7 +58,7 @@ Obviously, you can use the Official Module Manager from Forum.
 
 * Advantages
 	+ Lower risk of being your reports rejected by using non Official versions of something
-* Disavantages
+* Disadvantages
 	+ Less conveniency on diagnosing problems using the logs
 	+ Some annoying misfeatures
 	+ You need to cope with this type of [bad behaviour](https://forum.kerbalspaceprogram.com/index.php?/topic/50533-18x-19x-module-manager-413-november-30th-2019-right-to-ludicrous-speed/&do=findComment&comment=3742972). :(
