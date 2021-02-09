@@ -1,6 +1,6 @@
 ﻿/*
 	This file is part of Module Manager Watch Dog
-	(C) 2020 Lisias T : http://lisias.net <support@lisias.net>
+	(C) 2020-21 Lisias T : http://lisias.net <support@lisias.net>
 
 	Module Manager Watch Dog is licensed as follows:
 
@@ -8,7 +8,7 @@
 
 	And you are allowed to choose the License that better suit your needs.
 
-	KSP-Recall is distributed in the hope that it will be useful,
+	Module Manager Watchdog is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -39,7 +39,7 @@ namespace ModuleManagerWatchDog
 		}
 
 		internal static void error(string msg, params object[] @params)
-		{ 
+		{
 			UnityEngine.Debug.LogErrorFormat("[ModuleManagerWatchDog] ERROR: " + msg, @params);
 		}
 
