@@ -36,10 +36,9 @@ This is my personal fork of Module Manager, aiming to fix some non functional bu
 * Advantages
 	+ Slightly faster, mainly on systems with less memory available and a lot of patches.
 	+ Way better logging
-		- But still lacking some features. 
-	+ Some fixes from small annoyances or bugs, as long they doesn't break compatibility with the upstream. 
-	+ It works on every KSP Version from 1.4.x to the latest
-		- KSP 1.3.1 and 1.2.2 are work in progress, to be released soon.
+	+ Some fixes from small annoyances or bugs, as long they don't break compatibility with the upstream. 
+	+ It works on every KSP Version from 1.3.0 to the latest
+		- 1.2.2 are currently in Technology Demonstration.
 * Disadvantages
 	+ It's not supported by most of the Add'On authors
 		- To tell you the true, I'm the only one supporting this stunt. :)
@@ -57,7 +56,7 @@ If you are willing to risk your SAS, you can downloaded it from my github:
 Obviously, you can use the Official Module Manager from Forum.
 
 * Advantages
-	+ Lower risk of being your reports rejected by using non Official versions of something
+	+ No risk of having your reports rejected by using non Official versions of something
 * Disadvantages
 	+ Less conveniency on diagnosing problems using the logs
 	+ Some annoying misfeatures
@@ -65,5 +64,13 @@ Obviously, you can use the Official Module Manager from Forum.
 		- Yeah, it was moderated, so...
 			-  ![One](./Screen%20Shot%202020-02-18%20at%2008.59.14.png)
 			-  ![Two](./Screen%20Shot%202020-02-18%20at%2008.59.21.png)
+	+ Or this kind of [asshole](https://forum.kerbalspaceprogram.com/index.php?/topic/50533-18x-110x-module-manager-414-july-7th-2020-locked-inside-edition/&do=findComment&comment=3816948). 
+		- ![](./Screen%20Shot%202020-07-08%20at%2007.47.29.png) 
+		- That is a follow up from this [comment](https://github.com/UbioWeldingLtd/UbioWeldContinued/issues/47#issuecomment-655553866).
+		- ![](./Screen%20Shot%202020-07-11%20at%2007.29.20.png)
+	+ And now, some of his friends is slandering my Add'Ons. :)
+		- ![](./Screen%20Shot%202020-07-14%20at%2002.14.51.png) 
+	+ No software can be better than the dude that wrote it.
+		- Or his friends. 
 
-To download it, go to [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/50533-18x-19x-module-manager-413-november-30th-2019-right-to-ludicrous-speed/&tab=comments#comment-720814).  
+To download it, go to [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/50533-*).
