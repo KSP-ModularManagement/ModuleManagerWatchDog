@@ -1,6 +1,6 @@
 {
 	"NAME"		: "Module Manager Watch Dog",
-	"URL"		: "https://raw.githubusercontent.com/net-lisias-ksp/ModuleManagerWatchDog/master/KSP_Recall.version",
+	"URL"		: "https://raw.githubusercontent.com/net-lisias-ksp/ModuleManagerWatchDog/master/ModuleManagerWatchDog.version",
 	"DOWNLOAD"	: "https://github.com/net-lisias-ksp/ModuleManagerWatchDog/releases",
 	"CHANGE_LOG_URL": "https://raw.githubusercontent.com/net-lisias-ksp/ModuleManagerWatchDog/master/CHANGES.md",
 
