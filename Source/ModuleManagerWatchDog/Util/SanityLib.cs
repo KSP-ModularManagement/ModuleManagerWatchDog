@@ -28,7 +28,7 @@ namespace ModuleManagerWatchDog
 		private static string _EnforcedVersion;
 		public static bool IsExempted(int kspMajor, int kspMinor)
 		{
-			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDoc.cfg");
+			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDog");
 			if (null != cn)
 			{
 				string value = cn.GetValue("EnforceRulesFromKSPVersion");
@@ -38,15 +38,21 @@ namespace ModuleManagerWatchDog
 			try
 			{
 				string[] v = _EnforcedVersion.Split('.');
-				return
+				bool r =
 					kspMajor <= Int16.Parse(v[0])
 					&&
 					kspMinor < Int16.Parse(v[1])
 				;
+				Log.dbg("Current version {0}.{1} is{2}exempted, as the the rules are enforced from KSP {3}."
+						, kspMajor, kspMinor
+						, r ? " " : " not "
+						, _EnforcedVersion
+					);
+				return r;
 			}
 			catch (Exception e)
 			{
-				Log.error("CheckIsEnvorceable : {0}", e.ToString());
+				Log.error("CheckIsEnvorceable : {0}. Rules are being enforced.", e.ToString());
 				return true;
 			}
 		}
@@ -69,15 +75,11 @@ namespace ModuleManagerWatchDog
 
 		public static string[] GetFromConfig(string nodeName, string valueName)
 		{
-			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDoc.cfg");
+			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDog");
 			if (null == cn) return new string[]{};
-
-			cn = cn.GetNode("WatchDog");
-			if (null == cn) return new string[]{};
-
+			if ("WatchDog" != cn.name) return new string[]{};
 			cn = cn.GetNode(nodeName);
 			if (null == cn) return new string[]{};
-
 			return cn.GetValues(valueName);
 		}
 	}
