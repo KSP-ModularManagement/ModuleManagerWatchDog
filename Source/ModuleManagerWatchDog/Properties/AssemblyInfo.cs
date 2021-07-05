@@ -5,12 +5,12 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("Module Manager Watch Dog")]
-[assembly: AssemblyDescription("A Awatch Dog for Module Manager")]
+[assembly: AssemblyDescription("A Watch Dog for Module Manager")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("L Aerospace KSP Division")]
-[assembly: AssemblyProduct("Resourceful")]
-[assembly: AssemblyCopyright("© 2020 LisiasT")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany(ModuleManagerWatchDog.LegalMamboJambo.Company)]
+[assembly: AssemblyProduct(ModuleManagerWatchDog.LegalMamboJambo.Product)]
+[assembly: AssemblyCopyright(ModuleManagerWatchDog.LegalMamboJambo.Copyright)]
+[assembly: AssemblyTrademark(ModuleManagerWatchDog.LegalMamboJambo.Trademark)]
 [assembly: AssemblyCulture("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".

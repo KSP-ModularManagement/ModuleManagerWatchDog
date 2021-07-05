@@ -47,6 +47,7 @@
     <Compile Include="GUI\Abstract.cs" />
     <Compile Include="GUI\MessageBox.cs" />
     <Compile Include="GUI\FatalError.cs" />
+    <Compile Include="Properties\LegalMamboJambo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">
