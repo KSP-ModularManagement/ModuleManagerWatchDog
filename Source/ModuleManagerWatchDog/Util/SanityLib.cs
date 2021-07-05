@@ -63,7 +63,7 @@ namespace ModuleManagerWatchDog
 		public static bool CheckIsOnGameData(string path, string filename = null)
 		{
 			string fullpath = Path.GetFullPath(path);
-			string[] subpaths = Path.GetDirectoryName(fullpath).Split(Path.PathSeparator);
+			string[] subpaths = Path.GetDirectoryName(fullpath).Split(Path.DirectorySeparatorChar);
 			return "GameData" == subpaths[subpaths.Length-1] && (null == filename) ? true : filename == Path.GetFileName(fullpath);
 		}
 
