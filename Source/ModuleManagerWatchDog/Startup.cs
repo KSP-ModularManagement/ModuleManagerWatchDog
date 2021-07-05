@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 using UnityEngine;
 
@@ -62,28 +61,23 @@ namespace ModuleManagerWatchDog
 
 		private String CheckMyself()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded =
-				from a in AssemblyLoader.loadedAssemblies
-					let ass = a.assembly
-					where "ModuleManagerWatchDog" == ass.GetName().Name
-					orderby a.path ascending
-					select a;
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("ModuleManagerWatchDog");
 
+			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
 			if (1 != loaded.Count()) return "There're more than one MM Watch Dog on this KSP instalment! Please delete all but the one you intend to use!";
+			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path))
+				return "666_ModuleManagerWatchDog.dll <b>must be</b> directly on GameData and not inside any subfolder (i.e., it must be in the same place ModuleManager.dll is). Please move 666_ModuleManagerWatchDog.dll directly into GameData.";
 			return null;
 		}
 
 		private String CheckModuleManager()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded =
-				from a in AssemblyLoader.loadedAssemblies
-					let ass = a.assembly
-					where "ModuleManager" == ass.GetName().Name
-					orderby a.path ascending
-					select a;
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("ModuleManager");
 
 			if (0 == loaded.Count()) return "There's no Module Manager on this KSP instalment! You need to install Module Manager!";
 			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP instalment! Please delete all but the one you intend to use!";
+			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path))
+				return "ModuleManager.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move ModuleManager.dll directly into GameData.";
 			return null;
 		}
 	}

@@ -21,7 +21,7 @@ using KSPe.UI;
 
 namespace KSPe.Common.Dialogs
 {
-	internal class ShowStopperAlertBox : AbstractDialog
+	public class ShowStopperAlertBox : AbstractDialog
 	{
 		private static readonly string aMSG = "close KSP and then fix the problem described above";
 

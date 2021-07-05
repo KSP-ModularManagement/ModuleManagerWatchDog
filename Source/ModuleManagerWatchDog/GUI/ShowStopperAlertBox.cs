@@ -19,18 +19,18 @@ using UnityEngine;
 
 namespace ModuleManagerWatchDog.GUI
 {
-    internal static class ShowStopperAlertBox
-    {
-        private static readonly string AMSG = @"to get instructions about how to Download and Install Module Manager.";
+	internal static class ShowStopperAlertBox
+	{
+		private static readonly string AMSG = @"to get instructions about how to Download and Install Module Manager.";
 
-        internal static void Show(string msg)
-        {
-            KSPe.Common.Dialogs.ShowStopperAlertBox.Show(
-                msg,
-                AMSG,
-                () => { Application.OpenURL("https://ksp.lisias.net/add-ons/ModuleManager/WatchDog/KNOWN_ISSUES"); Application.Quit(); }
-            );
-            Log.detail("\"Houston, we have a Problem!\" was displayed");
-        }
-    }
+		internal static void Show(string msg)
+		{
+			KSPe.Common.Dialogs.ShowStopperAlertBox.Show(
+				msg,
+				AMSG,
+				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/ModuleManager/WatchDog/KNOWN_ISSUES"); Application.Quit(); }
+			);
+			Log.detail("\"Houston, we have a Problem!\" was displayed about : {0}", msg);
+		}
+	}
 }
