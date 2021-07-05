@@ -32,17 +32,17 @@ namespace ModuleManagerWatchDog
 
 			try
 			{
-				int kspMajor = Versioning.version_major;
-				int kspMinor = Versioning.version_minor;
-
 				{
 					String msg = CheckMyself();
 					if ( null != msg )
 						GUI.ShowStopperAlertBox.Show(msg);
 				}
 
-				// On KSP < 1.8, Module Manager works as expected. Do not check.
-				if (kspMajor <= 1 && kspMinor < 8) return;
+				// On KSP < 1.8, duplicated Module Managers are not a problem, besides being a good idea to avoid them.
+				// By not being a problem, I let the user choose or not to be pickly (I am!) by patching the respective value on the
+				// configuration Config. 
+				if (SanityLib.IsExempted(Versioning.version_major, Versioning.version_minor))
+					return;
 
 				{
 					String msg = CheckModuleManager();

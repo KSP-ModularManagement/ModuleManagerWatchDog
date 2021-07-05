@@ -25,6 +25,32 @@ namespace ModuleManagerWatchDog
 {
 	public static class SanityLib
 	{
+		private static string _EnforcedVersion;
+		public static bool IsExempted(int kspMajor, int kspMinor)
+		{
+			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDoc.cfg");
+			if (null != cn)
+			{
+				string value = cn.GetValue("EnforceRulesFromKSPVersion");
+				_EnforcedVersion = string.IsNullOrEmpty(value) ? "1.8" : value;
+			}
+
+			try
+			{
+				string[] v = _EnforcedVersion.Split('.');
+				return
+					kspMajor <= Int16.Parse(v[0])
+					&&
+					kspMinor < Int16.Parse(v[1])
+				;
+			}
+			catch (Exception e)
+			{
+				Log.error("CheckIsEnvorceable : {0}", e.ToString());
+				return true;
+			}
+		}
+
 		public static IEnumerable<AssemblyLoader.LoadedAssembly> FetchDllsByAssemblyName(string assemblyName)
 		{
 			return from a in AssemblyLoader.loadedAssemblies

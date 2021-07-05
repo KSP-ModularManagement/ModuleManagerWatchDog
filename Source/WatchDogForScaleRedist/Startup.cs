@@ -34,9 +34,6 @@ namespace WatchDogForScaleRedist
 
 			try
 			{
-				int kspMajor = Versioning.version_major;
-				int kspMinor = Versioning.version_minor;
-
 				// Always check for being the unique Assembly loaded. This will avoid problems in the future.
 				{
 					String msg = CheckMyself();
@@ -44,9 +41,11 @@ namespace WatchDogForScaleRedist
 						GUI.ShowStopperAlertBox.Show(msg);
 				}
 
-				// On KSP < 1.8, dupliated Redists are not a problem, besides being a good idea to avoid them.
-				// But not being a problem, I will not pesky the user about.
-				if (kspMajor <= 1 && kspMinor < 8) return;
+				// On KSP < 1.8, duplicated Redists are not a problem, besides being a good idea to avoid them.
+				// By not being a problem, I let the user choose or not to be pickly (I am!) by patching the respective value on the
+				// configuration Config. 
+				if (SanityLib.IsExempted(Versioning.version_major, Versioning.version_minor))
+					return;
 
 				{
 					String msg = CheckScaleRedist();
