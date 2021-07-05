@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleManagerWatchDog", "Source\ModuleManagerWatchDog\ModuleManagerWatchDog.csproj", "{C4A875CC-E958-429F-944B-D0702EA76A89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogForScaleRedist", "Source\WatchDogForScaleRedist\WatchDogForScaleRedist.csproj", "{2A16D384-BD05-45C2-9FAD-4CE2882854A8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogForInterstellarRedist", "Source\WatchDogForInterstellarRedist\WatchDogForInterstellarRedist.csproj", "{580A1F8F-30A3-4ABC-A6B6-C70BF6A66BF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogForScaleRedist", "Source\WatchDogForScaleRedist\WatchDogForScaleRedist.csproj", "{2A16D384-BD05-45C2-9FAD-4CE2882854A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +21,14 @@ Global
 		{C4A875CC-E958-429F-944B-D0702EA76A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A875CC-E958-429F-944B-D0702EA76A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A875CC-E958-429F-944B-D0702EA76A89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{580A1F8F-30A3-4ABC-A6B6-C70BF6A66BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{580A1F8F-30A3-4ABC-A6B6-C70BF6A66BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{580A1F8F-30A3-4ABC-A6B6-C70BF6A66BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{580A1F8F-30A3-4ABC-A6B6-C70BF6A66BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A16D384-BD05-45C2-9FAD-4CE2882854A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
