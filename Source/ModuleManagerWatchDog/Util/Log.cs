@@ -44,7 +44,7 @@ namespace ModuleManagerWatchDog
 		[ConditionalAttribute("DEBUG")]
 		internal static void dbg(string msg, params object[] @params)
 		{
-			UnityEngine.Debug.LogErrorFormat("[ModuleManagerWatchDog] ERROR: " + msg, @params);
+			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog] DEBUG: " + msg, @params);
 		}
 	}
 }

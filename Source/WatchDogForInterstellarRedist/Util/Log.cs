@@ -44,7 +44,7 @@ namespace WatchDogForInterstellarRedist
 		[ConditionalAttribute("DEBUG")]
 		internal static void dbg(string msg, params object[] @params)
 		{
-			UnityEngine.Debug.LogErrorFormat("[WatchDogForInterstellarRedist] ERROR: " + msg, @params);
+			UnityEngine.Debug.LogFormat("[WatchDogForInterstellarRedist] DEBUG: " + msg, @params);
 		}
 	}
 }

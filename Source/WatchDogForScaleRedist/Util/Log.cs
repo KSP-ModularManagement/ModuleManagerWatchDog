@@ -44,7 +44,7 @@ namespace WatchDogForScaleRedist
 		[ConditionalAttribute("DEBUG")]
 		internal static void dbg(string msg, params object[] @params)
 		{
-			UnityEngine.Debug.LogErrorFormat("[WatchDogForScaleRedist] ERROR: " + msg, @params);
+			UnityEngine.Debug.LogFormat("[WatchDogForScaleRedist] DEBUG: " + msg, @params);
 		}
 	}
 }
