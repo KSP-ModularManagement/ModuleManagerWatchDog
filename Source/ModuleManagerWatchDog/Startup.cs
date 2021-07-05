@@ -64,7 +64,7 @@ namespace ModuleManagerWatchDog
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("ModuleManagerWatchDog");
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return "There're more than one MM Watch Dog on this KSP instalment! Please delete all but the one you intend to use!";
+			if (1 != loaded.Count()) return "There're more than one MM Watch Dog on this KSP installment! Please delete all but the one you intend to use!";
 			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path))
 				return "666_ModuleManagerWatchDog.dll <b>must be</b> directly on GameData and not inside any subfolder (i.e., it must be in the same place ModuleManager.dll is). Please move 666_ModuleManagerWatchDog.dll directly into GameData.";
 			return null;
@@ -74,8 +74,8 @@ namespace ModuleManagerWatchDog
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("ModuleManager");
 
-			if (0 == loaded.Count()) return "There's no Module Manager on this KSP instalment! You need to install Module Manager!";
-			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP instalment! Please delete all but the one you intend to use!";
+			if (0 == loaded.Count()) return "There's no Module Manager on this KSP installment! You need to install Module Manager!";
+			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
 			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path))
 				return "ModuleManager.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move ModuleManager.dll directly into GameData.";
 			return null;

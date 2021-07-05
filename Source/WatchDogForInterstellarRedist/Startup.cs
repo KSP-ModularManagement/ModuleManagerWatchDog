@@ -65,7 +65,7 @@ namespace WatchDogForInterstellarRedist
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("WatchDogForInterstellarRedist");
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return "There're more than one Interstellar Redist Watch Dog on this KSP instalment! Please delete all but the one on GameData/ModuleManagerWatchDog !";
+			if (1 != loaded.Count()) return "There're more than one Interstellar Redist Watch Dog on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog !";
 			return null;
 		}
 
@@ -83,10 +83,10 @@ namespace WatchDogForInterstellarRedist
 
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("Interstellar_Redist");
 
-			if (0 == loaded.Count()) return "There's no Interstellar_Redist.dll on this KSP instalment, besides you having installed known DLL(s) that need it!!";
-			if (1 != loaded.Count()) return "There're more than one Interstellar_Redist.dll on this KSP instalment! Please delete all but the GameData/Interstellar_Redist.dll one!";
+			if (0 == loaded.Count()) return "There's no Interstellar Redist dll on this KSP installment, besides you having installed known DLL(s) that need it!!";
+			if (1 != loaded.Count()) return "There're more than one Interstellar Redist dll on this KSP installment! Please delete all but the GameData/Interstellar_Redist.dll one!";
 			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path, "Interstellar_Redist.dll"))
-				return "Interstellar_Redist.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move Interstellar_Redist.dll directly into GameData.";
+				return "Interstellar Redist dll <b>must be</b> directly on GameData and not inside any subfolder. Please move Interstellar_Redist.dll directly into GameData.";
 			return null;
 		}
 	}

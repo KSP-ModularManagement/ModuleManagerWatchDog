@@ -65,7 +65,7 @@ namespace WatchDogForScaleRedist
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("WatchDogForScaleRedist");
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return "There're more than one Scale Redist Watch Dog on this KSP instalment! Please delete all but the one on GameData/ModuleManagerWatchDog !";
+			if (1 != loaded.Count()) return "There're more than one Scale Redist Watch Dog on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog !";
 			return null;
 		}
 
@@ -83,10 +83,10 @@ namespace WatchDogForScaleRedist
 
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("Scale_Redist");
 
-			if (0 == loaded.Count()) return "There's no Scale_Redist.dll on this KSP instalment, besides you having installed known DLL(s) that need it!!";
-			if (1 != loaded.Count()) return "There're more than one Scale_Redist.dll on this KSP instalment! Please delete all but the GameData/999_Scale_Redist.dll one!";
+			if (0 == loaded.Count()) return "There's no Scale Redist dll on this KSP installment, besides you having installed known DLL(s) that need it!!";
+			if (1 != loaded.Count()) return "There're more than one Scale Redist dll on this KSP installment! Please delete all but the GameData/999_Scale_Redist.dll one!";
 			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path, "999_Scale_Redist.dll"))
-				return "999_Scale_Redist.dll <b>must be</b> directly on GameData (and not inside any subfolder) and <b>should</b> be named 999_Scale_Redist.dll . Please move 999_Scale_Redist.dll directly into GameData.";
+				return "Scale Redist dll <b>must be</b> directly on GameData (and not inside any subfolder) and <b>should</b> be named 999_Scale_Redist.dll . Please move 999_Scale_Redist.dll directly into GameData.";
 			return null;
 		}
 	}

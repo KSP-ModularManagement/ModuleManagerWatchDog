@@ -28,7 +28,7 @@ namespace WatchDogForInterstellarRedist.GUI
 			KSPe.Common.Dialogs.ShowStopperAlertBox.Show(
 				msg,
 				AMSG,
-				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/WatchDog/TweakScale"); Application.Quit(); }
+				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/WatchDog/InterstellarRedist"); Application.Quit(); }
 			);
 			Log.detail("\"Houston, we have a Problem!\" was displayed about : {0}", msg);
 		}
