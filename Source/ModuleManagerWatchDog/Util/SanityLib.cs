@@ -34,10 +34,25 @@ namespace ModuleManagerWatchDog
 					select a;
 		}
 
-		public static bool CheckIsOnGameData(string path)
+		public static bool CheckIsOnGameData(string path, string filename = null)
 		{
-			string[] subpaths = Path.GetDirectoryName(Path.GetFullPath(path)).Split(Path.PathSeparator);
-			return "GameData" == subpaths[subpaths.Length-1];
+			string fullpath = Path.GetFullPath(path);
+			string[] subpaths = Path.GetDirectoryName(fullpath).Split(Path.PathSeparator);
+			return "GameData" == subpaths[subpaths.Length-1] && (null == filename) ? true : filename == Path.GetFileName(fullpath);
+		}
+
+		public static string[] GetFromConfig(string nodeName, string valueName)
+		{
+			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDoc.cfg");
+			if (null == cn) return new string[]{};
+
+			cn = cn.GetNode("WatchDog");
+			if (null == cn) return new string[]{};
+
+			cn = cn.GetNode(nodeName);
+			if (null == cn) return new string[]{};
+
+			return cn.GetValues(valueName);
 		}
 	}
 }

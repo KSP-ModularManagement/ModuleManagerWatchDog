@@ -2,13 +2,13 @@ source ../CONFIG.inc
 
 PACKAGE="ModuleManagerWatchDog"
 TARGETDIR="${PACKAGE}"
-TARGETBINDIR="$TARGETDIR"
+TARGETBINDIR="${TARGETDIR}/Plugins"
 PROJECTSDIR="$PACKAGE/"
 VERSIONFILE="ModuleManagerWatchDog.version"
 
 GD_DLLS="ModuleManagerWatchDog"
 GD_PRIORITY="666"
-DLLS=""
+DLLS="WatchDogForScaleRedist"
 
 
 PROJECT_BRANCH=`git branch | grep \* | cut -d ' ' -f2`
