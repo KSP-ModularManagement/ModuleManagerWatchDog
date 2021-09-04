@@ -43,7 +43,7 @@ namespace ModuleManagerWatchDog
 					&&
 					kspMinor < Int16.Parse(v[1])
 				;
-				Log.dbg("Current version {0}.{1} is{2}exempted, as the the rules are enforced from KSP {3}."
+				Log.dbg("Current version {0}.{1} is{2}exempted, as the rules enforced are from KSP {3}."
 						, kspMajor, kspMinor
 						, r ? " " : " not "
 						, _EnforcedVersion

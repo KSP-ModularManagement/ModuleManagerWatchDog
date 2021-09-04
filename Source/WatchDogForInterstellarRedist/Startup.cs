@@ -48,7 +48,7 @@ namespace WatchDogForInterstellarRedist
 					return;
 
 				{
-					String msg = CheckScaleRedist();
+					String msg = CheckRedist();
 					if ( null != msg )
 						GUI.ShowStopperAlertBox.Show(msg);
 				}
@@ -69,7 +69,7 @@ namespace WatchDogForInterstellarRedist
 			return null;
 		}
 
-		private String CheckScaleRedist()
+		private String CheckRedist()
 		{
 			{
 				string[] knownClients = SanityLib.GetFromConfig("Interstellar_Redist", "knownClient");

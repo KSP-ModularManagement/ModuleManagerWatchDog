@@ -48,7 +48,7 @@ namespace WatchDogForScaleRedist
 					return;
 
 				{
-					String msg = CheckScaleRedist();
+					String msg = CheckRedist();
 					if ( null != msg )
 						GUI.ShowStopperAlertBox.Show(msg);
 				}
@@ -69,7 +69,7 @@ namespace WatchDogForScaleRedist
 			return null;
 		}
 
-		private String CheckScaleRedist()
+		private String CheckRedist()
 		{
 			{
 				string[] knownClients = SanityLib.GetFromConfig("Scale_Redist", "knownClient");
