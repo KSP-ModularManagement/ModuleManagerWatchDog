@@ -25,61 +25,97 @@ namespace ModuleManagerWatchDog
 {
 	public static class SanityLib
 	{
-		private static string _EnforcedVersion;
-		public static bool IsExempted(int kspMajor, int kspMinor)
+		public static bool IsEnforceable(int kspMajor, int kspMinor)
 		{
 			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDog");
-			if (null != cn)
-			{
-				string value = cn.GetValue("EnforceRulesFromKSPVersion");
-				_EnforcedVersion = string.IsNullOrEmpty(value) ? "1.8" : value;
+			if (null == cn) return false;
+
+			int versionMajor = Versioning.version_major;
+			int versionMinor = Versioning.version_minor;;
+			{ 
+				string versionOverride = cn.GetValue("ForceRulesAsItWas");
+				if (null != versionOverride) try
+				{
+					string[] v = versionOverride.Split('.');
+					versionMajor = Int16.Parse(v[0]);
+					versionMinor = Int16.Parse(v[1]);
+				}
+				catch
+				{
+					versionMajor = Versioning.version_major;
+					versionMinor = Versioning.version_minor;
+				}
 			}
 
-			try
+			bool r = false;
+			string[] enforcedRules = cn.GetValues("EnforceRulesFor");
+			foreach (string ev in enforcedRules) try
 			{
-				string[] v = _EnforcedVersion.Split('.');
-				bool r =
-					kspMajor <= Int16.Parse(v[0])
+				string[] v = ev.Split('.');
+				r =
+					versionMajor >= kspMajor
 					&&
-					kspMinor < Int16.Parse(v[1])
+					versionMinor >= kspMinor
+					&&
+					kspMajor == Int16.Parse(v[0])
+					&&
+					kspMinor == Int16.Parse(v[1])
 				;
-				Log.dbg("Current version {0}.{1} is{2}exempted, as the rules enforced are from KSP {3}."
-						, kspMajor, kspMinor
-						, r ? " " : " not "
-						, _EnforcedVersion
-					);
-				return r;
+				if (r) break;
 			}
 			catch (Exception e)
 			{
-				Log.error("CheckIsEnvorceable : {0}. Rules are being enforced.", e.ToString());
+				Log.error("IsEnforceable : {0}. Rules are being enforced.", e.ToString());
 				return true;
 			}
+
+			Log.detail("Current version {0}.{1} is{2}enforced on rules for {3}.{4}."
+					, Versioning.version_major, Versioning.version_minor
+					, r ? " " : " not "
+					, kspMajor, kspMinor
+				);
+			return r;
 		}
 
-		public static IEnumerable<AssemblyLoader.LoadedAssembly> FetchDllsByAssemblyName(string assemblyName)
+		/**
+		 * If you need to fetch Assemblies being loaded or not (i.e., including the ones that KSP
+		 * didn't managed to finish the loading by faulty dependencies), you need to use this one.
+		 */
+		public static IEnumerable<System.Reflection.Assembly> FetchAssembliesByName(string assemblyName)
 		{
+			return from a in System.AppDomain.CurrentDomain.GetAssemblies()
+					where assemblyName == a.GetName().Name
+					orderby a.Location ascending
+					select a
+				;
+		}
+
+		/**
+		 * If you are interested only on assemblies that were properly loaded by KSP, this is the one you want.
+		 */
+		public static IEnumerable<AssemblyLoader.LoadedAssembly> FetchLoadedAssembliesByName(string assemblyName)
+		{ 
 			return from a in AssemblyLoader.loadedAssemblies
 					let ass = a.assembly
 					where assemblyName == ass.GetName().Name
 					orderby a.path ascending
-					select a;
+					select a
+				;
 		}
 
 		public static bool CheckIsOnGameData(string path, string filename = null)
 		{
 			string fullpath = Path.GetFullPath(path);
 			string[] subpaths = Path.GetDirectoryName(fullpath).Split(Path.DirectorySeparatorChar);
-			return "GameData" == subpaths[subpaths.Length-1] && (null == filename) ? true : filename == Path.GetFileName(fullpath);
+			return "GameData" == subpaths[subpaths.Length-1] && ((null == filename) || filename == Path.GetFileName(fullpath));
 		}
 
 		public static string[] GetFromConfig(string nodeName, string valueName)
 		{
-			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/WatchDog");
+			nodeName = nodeName.Replace("_", "");
+			ConfigNode cn = GameDatabase.Instance.GetConfigNode("ModuleManagerWatchDog/Plugins/"+nodeName+"/"+nodeName);
 			if (null == cn) return new string[]{};
 			if ("WatchDog" != cn.name) return new string[]{};
-			cn = cn.GetNode(nodeName);
-			if (null == cn) return new string[]{};
 			return cn.GetValues(valueName);
 		}
 	}

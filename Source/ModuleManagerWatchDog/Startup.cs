@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Reflection;
 using UnityEngine;
 
 namespace ModuleManagerWatchDog
@@ -32,25 +32,17 @@ namespace ModuleManagerWatchDog
 
 			try
 			{
-				{
-					String msg = CheckMyself();
-					if ( null != msg )
-						GUI.ShowStopperAlertBox.Show(msg);
-				}
+				// Always check for being the unique Assembly loaded. This will avoid problems in the future.
+				String msg = CheckMyself();
 
-				// On KSP < 1.8, duplicated Module Managers are not a problem, besides being a good idea to avoid them.
-				// By not being a problem, I let the user choose or not to be pickly (I am!) by patching the respective value on the
-				// configuration Config. 
-				if (SanityLib.IsExempted(Versioning.version_major, Versioning.version_minor))
-					return;
+				if (null == msg)
+					msg = CheckModuleManager();
 
-				{
-					String msg = CheckModuleManager();
-					if ( null != msg )
-						GUI.ShowStopperAlertBox.Show(msg);
-					else
-						Log.info("Module Manager is good to go.");
-				}
+				if (null == msg && SanityLib.IsEnforceable(1, 8))
+					 msg = CheckModuleManager18();
+
+				if ( null != msg )
+					GUI.ShowStopperAlertBox.Show(msg);
 			}
 			catch (Exception e)
 			{
@@ -59,25 +51,34 @@ namespace ModuleManagerWatchDog
 			}
 		}
 
-		private String CheckMyself()
+		private const string ASSEMBLY_NAME		= "ModuleManager";
+
+		private string CheckMyself()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("ModuleManagerWatchDog");
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Namespace);
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
 			if (1 != loaded.Count()) return "There're more than one MM Watch Dog on this KSP installment! Please delete all but the one you intend to use!";
-			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path))
+			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
 				return "666_ModuleManagerWatchDog.dll <b>must be</b> directly on GameData and not inside any subfolder (i.e., it must be in the same place ModuleManager.dll is). Please move 666_ModuleManagerWatchDog.dll directly into GameData.";
 			return null;
 		}
 
-		private String CheckModuleManager()
+		private string CheckModuleManager()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("ModuleManager");
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
 
 			if (0 == loaded.Count()) return "There's no Module Manager on this KSP installment! You need to install Module Manager!";
-			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
-			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path))
+			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
 				return "ModuleManager.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move ModuleManager.dll directly into GameData.";
+			return null;
+		}
+
+		private string CheckModuleManager18()
+		{
+			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
+
+			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
 			return null;
 		}
 	}

@@ -35,23 +35,27 @@ namespace WatchDogForScaleRedist
 			try
 			{
 				// Always check for being the unique Assembly loaded. This will avoid problems in the future.
-				{
-					String msg = CheckMyself();
-					if ( null != msg )
-						GUI.ShowStopperAlertBox.Show(msg);
-				}
+				String msg = CheckMyself();
 
-				// On KSP < 1.8, duplicated Redists are not a problem, besides being a good idea to avoid them.
-				// By not being a problem, I let the user choose or not to be pickly (I am!) by patching the respective value on the
-				// configuration Config. 
-				if (SanityLib.IsExempted(Versioning.version_major, Versioning.version_minor))
-					return;
-
+				// If no known clients found, no need to further checks.
+				if (null == msg && IsNeeded())
 				{
-					String msg = CheckRedist();
-					if ( null != msg )
-						GUI.ShowStopperAlertBox.Show(msg);
+					Log.detail("Clients found. Checking integrity...");
+
+					if ( null == msg )
+						msg = CheckRedist();
+
+					if (null == msg && SanityLib.IsEnforceable(1, 8))
+						msg = CheckRedist18();
+
+					if (null == msg)
+						Log.detail("System is good to go.");
 				}
+				else
+					Log.detail("No clients found. Sanity Check aborted.");
+
+				if ( null != msg )
+					GUI.ShowStopperAlertBox.Show(msg);
 			}
 			catch (Exception e)
 			{
@@ -60,33 +64,50 @@ namespace WatchDogForScaleRedist
 			}
 		}
 
-		private String CheckMyself()
+		private const string ASSEMBLY_NAME		= "Scale_Redist";
+		private const string DLL_FILENAME		= "999_Scale_Redist.dll";
+		private const string ERR_MULTIPLE_TOOL	= "There're more than one Scale Redist Watch Dog on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog/Plugins !";
+		private const string ERR_MISSING_DLL	= "There's no Scale Redist dll on this KSP installment, besides you having installed known DLL(s) that need it!!";
+		private const string ERR_MULTIPLE_DLL	= "There're more than one Scale Redist dll on this KSP installment! Please delete all but the GameData/999_Scale_Redist.dll one!";
+		private const string ERR_MISPLACED_DLL	= "Scale Redist dll <b>must be</b> directly on GameData (and not inside any subfolder) and <b>should</b> be named 999_Scale_Redist.dll . Please move 999_Scale_Redist.dll directly into GameData.";
+
+		private string CheckMyself()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("WatchDogForScaleRedist");
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Namespace);
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return "There're more than one Scale Redist Watch Dog on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog !";
+			if (1 != loaded.Count()) return ERR_MULTIPLE_TOOL;
 			return null;
 		}
 
-		private String CheckRedist()
+		private bool IsNeeded()
 		{
-			{
-				string[] knownClients = SanityLib.GetFromConfig("Scale_Redist", "knownClient");
-				bool found = false;
-				foreach (string s in knownClients)
-					found |= SanityLib.FetchDllsByAssemblyName(s).Any();
+			string[] knownClients = SanityLib.GetFromConfig(ASSEMBLY_NAME, "knownClient");
 
-				// No known clients found, no need to check for it.
-				if (!found) return null;
-			}
+			foreach (string s in knownClients) if (SanityLib.FetchAssembliesByName(s).Any())
+				return true;
 
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchDllsByAssemblyName("Scale_Redist");
+			return false;
+		}
 
-			if (0 == loaded.Count()) return "There's no Scale Redist dll on this KSP installment, besides you having installed known DLL(s) that need it!!";
-			if (1 != loaded.Count()) return "There're more than one Scale Redist dll on this KSP installment! Please delete all but the GameData/999_Scale_Redist.dll one!";
-			if (!SanityLib.CheckIsOnGameData(loaded.First<AssemblyLoader.LoadedAssembly>().path, "999_Scale_Redist.dll"))
-				return "Scale Redist dll <b>must be</b> directly on GameData (and not inside any subfolder) and <b>should</b> be named 999_Scale_Redist.dll . Please move 999_Scale_Redist.dll directly into GameData.";
+		private string CheckRedist()
+		{
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
+			Log.detail("{0}", loaded.Count());
+			if (0 == loaded.Count()) return ERR_MISSING_DLL;
+			return null;
+		}
+
+		// On KSP < 1.8, duplicated Redists are not a problem, besides being a good idea to avoid them.
+		// However, KSP 1.12 mangled a bit how DLLs are loaded, masking when more than one Assembly with the same name is loaded.
+		// This may render the diagnosis a bit confusing
+		private string CheckRedist18()
+		{
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
+
+			if (1 != loaded.Count()) return ERR_MULTIPLE_DLL;
+			if (!SanityLib.CheckIsOnGameData(loaded.First().path, DLL_FILENAME))
+				return ERR_MISPLACED_DLL;
 			return null;
 		}
 	}
