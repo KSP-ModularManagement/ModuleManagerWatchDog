@@ -93,7 +93,6 @@ namespace WatchDogForScaleRedist
 		private string CheckRedist()
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
-			Log.detail("{0}", loaded.Count());
 			if (0 == loaded.Count()) return ERR_MISSING_DLL;
 			return null;
 		}
