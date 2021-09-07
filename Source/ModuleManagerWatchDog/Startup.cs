@@ -41,6 +41,9 @@ namespace ModuleManagerWatchDog
 				if (null == msg && SanityLib.IsEnforceable(1, 8))
 					 msg = CheckModuleManager18();
 
+				if (null == msg && SanityLib.IsEnforceable(1, 12))
+					 msg = CheckModuleManager112();
+
 				if ( null != msg )
 					GUI.ShowStopperAlertBox.Show(msg);
 			}
@@ -79,6 +82,27 @@ namespace ModuleManagerWatchDog
 			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
 
 			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
+			return null;
+		}
+
+		// KSP 1.12 makes my life harder with this new way of loading Assemblies electing by version.
+		// This will make badly installed DDLs a bit more dificult to diagnose.
+		// Now I have to detected if MM/L is installed together Canonical MM by brute force.
+		// If no MM/L is installed, I will let it go as is.
+		private string CheckModuleManager112()
+		{
+			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
+			System.Reflection.Assembly assembly = loaded.First();
+			AssemblyTitleAttribute attributes = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute), false);
+			string assemblyTittle = attributes.Title ?? "";
+			if (
+				(System.IO.File.Exists("GameData/ModuleManager.dll") && !assembly.Location.EndsWith("GameData/ModuleManager.dll"))
+				||
+				(assemblyTittle.StartsWith("Module Manager /L") && !assembly.Location.EndsWith("/ModuleManager.dll"))
+				||
+				(assembly.Location.EndsWith("/ModuleManager.dll") && !assemblyTittle.StartsWith("Module Manager /L"))
+				)
+				return "There're conflicting Module Manager versions on your instalment! You need to choose one version and remove the other(s)!";
 			return null;
 		}
 	}
