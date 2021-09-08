@@ -69,7 +69,7 @@ namespace ModuleManagerWatchDog
 				return true;
 			}
 
-			Log.detail("Current version {0}.{1} is{2}enforced on rules for {3}.{4}."
+			Log.detail("Current version {0}.{1} is{2}subject to the rules for {3}.{4}."
 					, Versioning.version_major, Versioning.version_minor
 					, r ? " " : " not "
 					, kspMajor, kspMinor
