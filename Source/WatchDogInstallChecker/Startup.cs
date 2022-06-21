@@ -26,15 +26,25 @@ namespace WatchDog.InstallChecker
 	internal class Startup : MonoBehaviour
 	{
 		private const string MYSELF_NAME			= "Module Manager WatchDog Main Assembly";
-		private const string MYSELF_SOURCE_FN		= "ModuleManagerWatchDog/Plugins/PluginData/ModuleManagerWatchDog.dll";
+		private readonly string MYSELF_SOURCE_FN	= System.IO.Path.Combine("ModuleManagerWatchDog",
+														System.IO.Path.Combine("Plugins",
+															System.IO.Path.Combine("PluginData", "ModuleManagerWatchDog.dll")
+														)
+													);
 		private const string MYSELF_TARGET_FN		= "666_ModuleManagerWatchDog.dll";
 
 		private const string MML_NAME				= "Module Manager";
-		private const string MML_SOURCE_FN			= "ModuleManager/PluginData/ModuleManager.dll";
+		private readonly string MML_SOURCE_FN		= System.IO.Path.Combine("ModuleManager",
+														System.IO.Path.Combine("PluginData", "ModuleManager.dll")
+													);
 		private const string MML_TARGET_FN			= "ModuleManager.dll";
 
 		private const string SCALE_NAME				= "TweakScale's Scale_Redist";
-		private const string SCALE_SOURCE_FN		= "TweakScale/Plugins/PluginData/Scale_Redist.dll";
+		private readonly string SCALE_SOURCE_FN		= System.IO.Path.Combine("TweakScale",
+														System.IO.Path.Combine("Plugins",
+															System.IO.Path.Combine("PluginData", "Scale_Redist.dll")
+														)
+													);
 		private const string SCALE_TARGET_FN		= "999_Scale_Redist.dll";
 
 		private void Start()

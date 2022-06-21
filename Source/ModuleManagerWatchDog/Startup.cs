@@ -60,6 +60,12 @@ namespace ModuleManagerWatchDog
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Namespace);
 
+#if DEBUG
+			Log.dbg("CheckMyself");
+			foreach (AssemblyLoader.LoadedAssembly la in loaded)
+				Log.dbg("{0} :: {1}", la.assembly.FullName, la.assembly.Location);
+#endif
+
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
 			if (1 != loaded.Count()) return "There're more than one MM Watch Dog on this KSP installment! Please delete all but the one you intend to use!";
 			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
@@ -71,6 +77,12 @@ namespace ModuleManagerWatchDog
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
 
+#if DEBUG
+			Log.dbg("CheckModuleManager");
+			foreach (AssemblyLoader.LoadedAssembly la in loaded)
+				Log.dbg("{0} :: {1}", la.assembly.FullName, la.assembly.Location);
+#endif
+
 			if (0 == loaded.Count()) return "There's no Module Manager on this KSP installment! You need to install Module Manager!";
 			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
 				return "ModuleManager.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move ModuleManager.dll directly into GameData.";
@@ -81,6 +93,12 @@ namespace ModuleManagerWatchDog
 		{
 			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
 
+#if DEBUG
+			Log.dbg("CheckModuleManager18");
+			foreach (System.Reflection.Assembly a in loaded)
+				Log.dbg("{0} :: {1}", a.FullName, a.Location);
+#endif
+
 			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
 			return null;
 		}
@@ -89,18 +107,26 @@ namespace ModuleManagerWatchDog
 		// This will make badly installed DDLs a bit more dificult to diagnose.
 		// Now I have to detected if MM/L is installed together Canonical MM by brute force.
 		// If no MM/L is installed, I will let it go as is.
+		static readonly string GAMEDATAMMDLL = System.IO.Path.Combine("GameData", "ModuleManager.dll");
+		static readonly string DASHMMDLL = GAMEDATAMMDLL.Replace("GameData", "");
 		private string CheckModuleManager112()
 		{
 			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
+#if DEBUG
+			Log.dbg("CheckModuleManager112");
+			foreach (System.Reflection.Assembly a in loaded)
+				Log.dbg("{0} :: {1}", a.FullName, a.Location);
+#endif
 			System.Reflection.Assembly assembly = loaded.First();
 			AssemblyTitleAttribute attributes = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute), false);
 			string assemblyTittle = attributes.Title ?? "";
+			Log.dbg("First ({0}) = {1} :: {2}", assemblyTittle, assembly.FullName, assembly.Location);
 			if (
-				(System.IO.File.Exists("GameData/ModuleManager.dll") && !assembly.Location.EndsWith("GameData/ModuleManager.dll"))
+				(System.IO.File.Exists(GAMEDATAMMDLL) && !assembly.Location.EndsWith(GAMEDATAMMDLL))
 				||
-				(assemblyTittle.StartsWith("Module Manager /L") && !assembly.Location.EndsWith("/ModuleManager.dll"))
+				(assemblyTittle.StartsWith("Module Manager /L") && !assembly.Location.EndsWith(GAMEDATAMMDLL))
 				||
-				(assembly.Location.EndsWith("/ModuleManager.dll") && !assemblyTittle.StartsWith("Module Manager /L"))
+				(assembly.Location.EndsWith(GAMEDATAMMDLL) && !assemblyTittle.StartsWith("Module Manager /L"))
 				)
 				return "There're conflicting Module Manager versions on your instalment! You need to choose one version and remove the other(s)!";
 			return null;
