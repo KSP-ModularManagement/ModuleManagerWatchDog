@@ -31,6 +31,23 @@ namespace WatchDogForScaleRedist
 		{
 			Log.force("Version {0}", ModuleManagerWatchDog.Version.Text);
 
+			if (SanityLib.FetchLoadedAssembliesByName("WatchDogInstallChecker").Any())
+				StartCoroutine("Coroutine");
+			else
+				this.Execute();
+		}
+
+		private System.Collections.IEnumerator Coroutine()
+		{
+			// If InstallChecker is loaded, burn some time to tive it time to do its job.
+			for (int i = 600; i >= 0; --i)	// 
+				yield return null;
+			this.Execute();
+			yield break;
+		}
+
+		private void Execute()
+		{
 			try
 			{
 				// Always check for being the unique Assembly loaded. This will avoid problems in the future.

@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2A16D384-BD05-45C2-9FAD-4CE2882854A8}</ProjectGuid>
+    <ProjectGuid>{2FC6C5E5-C7C9-4830-A13E-258730F47B87}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WatchDogForScaleRedist</RootNamespace>
-    <AssemblyName>WatchDogForScaleRedist</AssemblyName>
+    <RootNamespace>WatchDog.InstallChecker</RootNamespace>
+    <AssemblyName>WatchDogInstallChecker</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <BaseIntermediateOutputPath>..\..\obj\WatchDogForScaleRedist</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\obj\WatchDogInstallChecker</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,28 +29,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\LIB\managed\1.2.2\UnityEngine.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\..\LIB\managed\1.2.2\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\LIB\managed\1.2.2\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\ShowStopperAlertBox.cs" />
+    <Compile Include="..\ModuleManagerWatchDog\Properties\LegalMamboJambo.cs">
+      <Link>Properties\LegalMamboJambo.cs</Link>
+    </Compile>
+    <Compile Include="..\ModuleManagerWatchDog\Properties\Version.cs">
+      <Link>Properties\Version.cs</Link>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Util\Log.cs" />
+    <Compile Include="Util\SanityLib.cs" />
+    <Compile Include="GUI\Abstract.cs" />
+    <Compile Include="GUI\FatalError.cs" />
+    <Compile Include="GUI\MessageBox.cs" />
+    <Compile Include="GUI\ShowStopperAlertBox.cs" />
+    <Compile Include="GUI\WarningAlertbox.cs" />
+    <Compile Include="GUI\ShowRebootTheGame.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModuleManagerWatchDog\ModuleManagerWatchDog.csproj">
-      <Project>{C4A875CC-E958-429F-944B-D0702EA76A89}</Project>
-      <Name>ModuleManagerWatchDog</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\" />
     <Folder Include="Util\" />
+    <Folder Include="GUI\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

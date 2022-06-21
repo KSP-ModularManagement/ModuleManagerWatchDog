@@ -8,7 +8,7 @@
     <RootNamespace>WatchDogForInterstellarRedist</RootNamespace>
     <AssemblyName>WatchDogForInterstellarRedist</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <BaseIntermediateOutputPath>..\..\obj\$(AssemblyName)</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\obj\WatchDogForInterstellarRedist</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
