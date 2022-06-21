@@ -22,5 +22,5 @@ clean
 cd GameData
 
 zip -r $FILE ./$PACKAGE/* -x ".*"
-zip -d $FILE __MACOSX "**/.DS_Store"
+zip -d $FILE "__MACOSX/*" "**/.DS_Store"
 cd $pwd
