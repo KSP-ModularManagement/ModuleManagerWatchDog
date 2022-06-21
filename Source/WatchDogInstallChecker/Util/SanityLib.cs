@@ -16,7 +16,6 @@
 */
 using System;
 
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,11 +38,11 @@ namespace WatchDog.InstallChecker
 
 		internal static string UpdateIfNeeded(string name, string sourceFilename, string targetFilename)
 		{
-			sourceFilename = Path.Combine(SanityLib.CalcGameData(), sourceFilename);
-			targetFilename = Path.Combine(SanityLib.CalcGameData(), targetFilename);
-			if (File.Exists(sourceFilename))
+			sourceFilename = System.IO.Path.Combine(SanityLib.CalcGameData(), sourceFilename);
+			targetFilename = System.IO.Path.Combine(SanityLib.CalcGameData(), targetFilename);
+			if (System.IO.File.Exists(sourceFilename))
 			{
-				if (File.Exists(targetFilename))
+				if (System.IO.File.Exists(targetFilename))
 				{
 					{ 
 						System.Diagnostics.FileVersionInfo sourceVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(sourceFilename);
@@ -57,18 +56,18 @@ namespace WatchDog.InstallChecker
 						if (!sane)
 						{
 							Log.info("File {0} is not compatible with {1}. This is going to cause trouble, replacing it!", targetFilename, name);
-							File.Delete(targetFilename);	// Remove the file and update it no matter what!
-							return SanityLib.Update(name, sourceFilename, targetFilename);
+							Delete(targetFilename);	// Remove the file and update it no matter what!
+							return Update(name, sourceFilename, targetFilename);
 						}
 					}
 					{
 						System.Reflection.Assembly sourceAsm = System.Reflection.Assembly.LoadFile(sourceFilename);
 						System.Reflection.Assembly targetAsm = System.Reflection.Assembly.LoadFile(targetFilename);
 						if (!sourceAsm.GetName().Version.Equals(targetAsm.GetName().Version))
-							return SanityLib.Update(name, sourceFilename, targetFilename);
+							return Update(name, sourceFilename, targetFilename);
 						else
 						{
-							File.Delete(sourceFilename);
+							Delete(sourceFilename);
 							return null;
 						}
 					}
@@ -83,8 +82,9 @@ namespace WatchDog.InstallChecker
 		{
 			try
 			{
-				File.Copy(sourceFilename, targetFilename);
-				File.Delete(sourceFilename);
+				Copy(sourceFilename, targetFilename);
+				Log.dbg("Deleting {0}", sourceFilename);
+				Delete(sourceFilename);
 				return string.Format("{0} was updated.", name);
 			}
 			catch (Exception e)
@@ -94,19 +94,31 @@ namespace WatchDog.InstallChecker
 			}
 		}
 
+		private static void Copy(string sourceFilename, string targetFilename)
+		{
+			Log.dbg("Copying {0} to {1}", sourceFilename, targetFilename);
+			System.IO.File.Copy(sourceFilename, targetFilename);
+		}
+
+		private static void Delete(string filename)
+		{
+			Log.dbg("Deleting {0}", filename);
+			System.IO.File.Delete(filename);
+		}
+
 		private static string GAMEDATA = null;
 		private static string CalcGameData()
 		{
 			if (null != GAMEDATA) return GAMEDATA;
 			System.Reflection.Assembly asm = System.Reflection.Assembly.GetAssembly(typeof(UnityEngine.MonoBehaviour));
-			string path = Path.GetDirectoryName(asm.Location);
-			string candidate = Path.Combine(path, "GameData");
+			string path = System.IO.Path.GetDirectoryName(asm.Location);
+			string candidate = System.IO.Path.Combine(path, "GameData");
 			try
 			{
-				while (!Directory.Exists(candidate))
+				while (!System.IO.Directory.Exists(candidate))
 				{
-					path = Path.GetDirectoryName(path);
-					candidate = Path.Combine(path, "GameData");
+					path = System.IO.Path.GetDirectoryName(path);
+					candidate = System.IO.Path.Combine(path, "GameData");
 				}
 				Log.dbg("GameData found on {0}", GAMEDATA);
 				return (GAMEDATA = candidate);
