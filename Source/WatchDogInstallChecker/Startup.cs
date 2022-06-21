@@ -29,6 +29,10 @@ namespace WatchDog.InstallChecker
 		private const string MYSELF_SOURCE_FN		= "ModuleManagerWatchDog/Plugins/PluginData/ModuleManagerWatchDog.dll";
 		private const string MYSELF_TARGET_FN		= "666_ModuleManagerWatchDog.dll";
 
+		private const string MML_NAME				= "Module Manager";
+		private const string MML_SOURCE_FN			= "ModuleManager/PluginData/ModuleManager.dll";
+		private const string MML_TARGET_FN			= "ModuleManager.dll";
+
 		private const string SCALE_NAME				= "TweakScale's Scale_Redist";
 		private const string SCALE_SOURCE_FN		= "TweakScale/Plugins/PluginData/Scale_Redist.dll";
 		private const string SCALE_TARGET_FN		= "999_Scale_Redist.dll";
