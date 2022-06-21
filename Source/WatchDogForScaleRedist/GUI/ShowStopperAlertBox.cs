@@ -1,10 +1,9 @@
 ﻿/*
 	This file is part of Watch Dog for Scale Redist, a component from Module Manager Watch Dog
-	(C) 2020-21 Lisias T : http://lisias.net <support@lisias.net>
+		©2020-22 Lisias T : http://lisias.net <support@lisias.net>
 
 	Module Manager Watch Dog is licensed as follows:
-
-	* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
+		* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
 
 	Module Manager Watchdog is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
