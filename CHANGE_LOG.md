@@ -1,5 +1,7 @@
 # Module Manager Watch Dog :: Change Log
 
+* 2022-0719: 1.1.0.2 (LisiasT) for KSP >= 1.2.2
+	+ Fixes a mishap while updating the target DLL.
 * 2022-0621: 1.1.0.1 (LisiasT) for KSP >= 1.2.2
 	+ Adds a Install Checker for:
 		- The tool itself
