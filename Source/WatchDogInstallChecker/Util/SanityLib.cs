@@ -64,7 +64,11 @@ namespace WatchDog.InstallChecker
 						System.Reflection.Assembly sourceAsm = System.Reflection.Assembly.LoadFile(sourceFilename);
 						System.Reflection.Assembly targetAsm = System.Reflection.Assembly.LoadFile(targetFilename);
 						if (!sourceAsm.GetName().Version.Equals(targetAsm.GetName().Version))
+						{ 
+							Log.info("File {0} is older then {1}. This is going to cause trouble, updating it!", targetFilename, name);
+							Delete(targetFilename);	// Remove the file or the update will not work.
 							return Update(name, sourceFilename, targetFilename);
+						}
 						else
 						{
 							Delete(sourceFilename);
@@ -120,7 +124,7 @@ namespace WatchDog.InstallChecker
 					path = System.IO.Path.GetDirectoryName(path);
 					candidate = System.IO.Path.Combine(path, "GameData");
 				}
-				Log.dbg("GameData found on {0}", GAMEDATA);
+				Log.dbg("GameData found on {0}", candidate);
 				return (GAMEDATA = candidate);
 			}
 			catch (Exception e)
