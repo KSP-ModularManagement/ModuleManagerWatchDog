@@ -38,7 +38,7 @@ namespace ModuleManagerWatchDog
 					msg = CheckModuleManager();
 
 				if (null == msg && SanityLib.IsEnforceable(1, 8))
-					 msg = CheckModuleManager18();
+					 msg = CheckModuleManagerDoppelganger18();
 
 				if (null == msg && SanityLib.IsEnforceable(1, 12))
 					 msg = CheckModuleManager112();
@@ -89,16 +89,16 @@ namespace ModuleManagerWatchDog
 			return null;
 		}
 
-		private string CheckModuleManager18()
+		private string CheckModuleManagerDoppelganger18()
 		{
-			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
+			Log.dbg("CheckModuleManagerDoppelganger18");
 
+			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
 #if DEBUG
 			Log.dbg("CheckModuleManager18");
 			foreach (System.Reflection.Assembly a in loaded)
 				Log.dbg("{0} :: {1}", a.FullName, a.Location);
 #endif
-
 			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
 			return null;
 		}
