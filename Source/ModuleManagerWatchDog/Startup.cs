@@ -43,6 +43,9 @@ namespace ModuleManagerWatchDog
 				if (null == msg && SanityLib.IsEnforceable(1, 12))
 					 msg = CheckModuleManagerConflict112();
 
+				if (null == msg && SanityLib.IsEnforceable(1, 12))
+					 msg = CheckModuleManagerDoppelganger112();
+
 
 				if ( null != msg )
 					GUI.ShowStopperAlertBox.Show(msg);
@@ -135,5 +138,28 @@ namespace ModuleManagerWatchDog
 				return "There're conflicting Module Manager versions on your instalment! You need to choose one version and remove the other(s)!";
 			return null;
 		}
+
+		// Trashing KSP's Assembly Loader/Resolver is essemtially common place, but sometimes these guys outdo themselves.
+		//
+		// Besides preventing multiple instances of the ModuleManager Assembly from being loaded, since KSP 1.12
+		// **they still start them nevertheless**! This means the multiple ModuleManager's instances from the same Assembly can run
+		// in parallel, **duplicating** all patching!
+		//
+		// DAMN, SQUAD!!! :(
+		//
+		// See https://github.com/net-lisias-ksp/ModuleManagerWatchDog/issues/6 for details.
+		//
+		private string CheckModuleManagerDoppelganger112()
+		{
+			Log.dbg("CheckModuleManagerDoppelganger112");
+
+			int hits = 0;
+			foreach (AssemblyLoader.LoadedAssembly m in AssemblyLoader.loadedAssemblies)
+				if (ASSEMBLY_NAME.Equals(m.assembly.GetName().Name)) ++hits;
+
+			if (hits > 1) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
+			return null;
+		}
+
 	}
 }
