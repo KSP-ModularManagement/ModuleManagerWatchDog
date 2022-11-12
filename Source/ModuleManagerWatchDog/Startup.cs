@@ -41,7 +41,7 @@ namespace ModuleManagerWatchDog
 					 msg = CheckModuleManagerDoppelganger18();
 
 				if (null == msg && SanityLib.IsEnforceable(1, 12))
-					 msg = CheckModuleManager112();
+					 msg = CheckModuleManagerConflict112();
 
 
 				if ( null != msg )
@@ -104,12 +104,16 @@ namespace ModuleManagerWatchDog
 		}
 
 		// KSP 1.12 makes my life harder with this new way of loading Assemblies electing by version.
+		//
 		// This will make badly installed DDLs a bit more dificult to diagnose.
+		//
 		// Now I have to detected if MM/L is installed together Canonical MM by brute force.
+		//
 		// If no MM/L is installed, I will let it go as is.
 		static readonly string GAMEDATAMMDLL = System.IO.Path.Combine("GameData", "ModuleManager.dll");
 		static readonly string DASHMMDLL = GAMEDATAMMDLL.Replace("GameData", "");
-		private string CheckModuleManager112()
+		static readonly string FULLMMPATH = SanityLib.GetPathFor("GameData", "ModuleManager.dll");
+		private string CheckModuleManagerConflict112()
 		{
 			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
 #if DEBUG
@@ -117,16 +121,16 @@ namespace ModuleManagerWatchDog
 			foreach (System.Reflection.Assembly a in loaded)
 				Log.dbg("{0} :: {1}", a.FullName, a.Location);
 #endif
-			System.Reflection.Assembly assembly = loaded.First();
+			Assembly assembly = loaded.First();
 			AssemblyTitleAttribute attributes = (AssemblyTitleAttribute)Attribute.GetCustomAttribute(assembly, typeof(AssemblyTitleAttribute), false);
 			string assemblyTittle = attributes.Title ?? "";
 			Log.dbg("First ({0}) = {1} :: {2}", assemblyTittle, assembly.FullName, assembly.Location);
 			if (
-				(System.IO.File.Exists(GAMEDATAMMDLL) && !assembly.Location.EndsWith(GAMEDATAMMDLL))
+				(System.IO.File.Exists(FULLMMPATH) && !assembly.Location.EndsWith(GAMEDATAMMDLL))
 				||
-				(assemblyTittle.StartsWith("Module Manager /L") && !assembly.Location.EndsWith(GAMEDATAMMDLL))
+				(assemblyTittle.StartsWith("Module Manager /L") && !assembly.Location.EndsWith(DASHMMDLL))
 				||
-				(assembly.Location.EndsWith(GAMEDATAMMDLL) && !assemblyTittle.StartsWith("Module Manager /L"))
+				(assembly.Location.EndsWith(DASHMMDLL) && !assemblyTittle.StartsWith("Module Manager /L"))
 				)
 				return "There're conflicting Module Manager versions on your instalment! You need to choose one version and remove the other(s)!";
 			return null;
