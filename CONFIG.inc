@@ -1,10 +1,11 @@
-source ../CONFIG.inc
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+source ${SCRIPT_DIR}/../CONFIG.inc
 
 PACKAGE="ModuleManagerWatchDog"
 TARGETDIR="${PACKAGE}"
-TARGETBINDIR="${TARGETDIR}/Plugins"
+TARGETBINDIR="$TARGETDIR/Plugins"
 PROJECTSDIR="Source/$PACKAGE/"
-VERSIONFILE="$PACKAGE.version"
+VERSIONFILE="$PACKAGE.version"		
 
 DLLS="WatchDogForInterstellarRedist WatchDogForScaleRedist"
 
@@ -25,6 +26,7 @@ LIB_DLLS=""
 
 # External Libs from the LIB directory
 EXT_DLLS=""
+
 
 PROJECT_BRANCH=`git branch | grep \* | cut -d ' ' -f2`
 if [ "$PROJECT_BRANCH" == "master" ] ; then

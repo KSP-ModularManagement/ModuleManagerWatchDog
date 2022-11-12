@@ -9,11 +9,7 @@ IFS=$' '
 check() {
 	if [ ! -d "./GameData/$TARGETBINDIR/" ] ; then
 		rm -f "./GameData/$TARGETBINDIR/"
-		mkdir -p "./GameData/$TARGETBINDIR"
-	fi
-
-	if [ ! -z "$PD_DLLS" ] ; then
-		mkdir -p "./GameData/$TARGETBINDIR/PluginData"
+		mkdir -p "./GameData/$TARGETBINDIR/"
 	fi
 
 	for dll in $EXT_DLLS ; do
@@ -116,3 +112,5 @@ done
 for dll in $EXT_DLLS ; do
     deploy_ext $dll
 done
+
+echo "${VERSION} Deployed into ${KSP_DEV}"
