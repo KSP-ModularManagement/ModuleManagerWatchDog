@@ -102,11 +102,13 @@ namespace ModuleManagerWatchDog
 				;
 		}
 
-		public static bool CheckIsOnGameData(string path, string filename = null)
+		public static bool CheckIsOnGameData(string pathname, string filename = null)
 		{
-			string fullpath = Path.GetFullPath(path);
-			string[] subpaths = Path.GetDirectoryName(fullpath).Split(Path.DirectorySeparatorChar);
-			return "GameData" == subpaths[subpaths.Length-1] && ((null == filename) || filename == Path.GetFileName(fullpath));
+			string fullpath = Path.GetFullPath(pathname);
+			string directory = Path.GetDirectoryName(fullpath);
+			string gamedata = Path.GetFullPath(GetPathFor("GameData"));
+			return directory.Equals(gamedata)
+				&& ((null == filename) || filename == Path.GetFileName(fullpath));
 		}
 
 		public static string[] GetFromConfig(string nodeName, string valueName)
@@ -116,6 +118,15 @@ namespace ModuleManagerWatchDog
 			if (null == cn) return new string[]{};
 			if ("WatchDog" != cn.name) return new string[]{};
 			return cn.GetValues(valueName);
+		}
+
+		public static string GetPathFor(string path, params string[] paths)
+		{
+			string r = Path.GetFullPath(KSPUtil.ApplicationRootPath);
+			r = Path.Combine(r, path);
+			foreach (string p in paths)
+				r = Path.Combine(r, p);
+			return r;
 		}
 	}
 }
