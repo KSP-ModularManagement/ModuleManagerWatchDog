@@ -36,10 +36,25 @@ namespace WatchDog.InstallChecker
 				;
 		}
 
-		internal static string UpdateIfNeeded(string name, string sourceFilename, string targetFilename)
+		internal struct UpdateData
 		{
-			sourceFilename = System.IO.Path.Combine(SanityLib.CalcGameData(), sourceFilename);
-			targetFilename = System.IO.Path.Combine(SanityLib.CalcGameData(), targetFilename);
+			public readonly string name;
+			public readonly string sourceFilename;
+			public readonly string targetFilename;
+
+			internal UpdateData(string name, string sourceFilename, string targetFilename)
+			{
+				this.name = name;
+				this.sourceFilename = sourceFilename;
+				this.targetFilename = targetFilename;
+			}
+		}
+		internal static string UpdateIfNeeded(UpdateData ud)
+		{
+			string sourceFilename = System.IO.Path.Combine(SanityLib.CalcGameData(), ud.sourceFilename);
+			string targetFilename = System.IO.Path.Combine(SanityLib.CalcGameData(), ud.targetFilename);
+
+			Log.dbg("UpdateIfNeeded from {0} to {1}", sourceFilename, targetFilename);
 			if (System.IO.File.Exists(sourceFilename))
 			{
 				if (System.IO.File.Exists(targetFilename))
@@ -55,9 +70,9 @@ namespace WatchDog.InstallChecker
 
 						if (!sane)
 						{
-							Log.info("File {0} is not compatible with {1}. This is going to cause trouble, replacing it!", targetFilename, name);
+							Log.info("File {0} is not compatible with {1}. This is going to cause trouble, replacing it!", targetFilename, ud.name);
 							Delete(targetFilename);	// Remove the file and update it no matter what!
-							return Update(name, sourceFilename, targetFilename);
+							return Update(ud.name, sourceFilename, targetFilename);
 						}
 					}
 					{
@@ -65,9 +80,9 @@ namespace WatchDog.InstallChecker
 						System.Reflection.Assembly targetAsm = System.Reflection.Assembly.LoadFile(targetFilename);
 						if (!sourceAsm.GetName().Version.Equals(targetAsm.GetName().Version))
 						{ 
-							Log.info("File {0} is older then {1}. This is going to cause trouble, updating it!", targetFilename, name);
+							Log.info("File {0} is older then {1}. This is going to cause trouble, updating it!", targetFilename, ud.name);
 							Delete(targetFilename);	// Remove the file or the update will not work.
-							return Update(name, sourceFilename, targetFilename);
+							return Update(ud.name, sourceFilename, targetFilename);
 						}
 						else
 						{
@@ -76,7 +91,7 @@ namespace WatchDog.InstallChecker
 						}
 					}
 				}
-				else return SanityLib.Update(name, sourceFilename, targetFilename);
+				else return SanityLib.Update(ud.name, sourceFilename, targetFilename);
 			}
 			// Nothing to do. If this is an error, someone else will yell about.
 			return null;
@@ -84,10 +99,10 @@ namespace WatchDog.InstallChecker
 
 		private static string Update(string name, string sourceFilename, string targetFilename)
 		{
+			Log.dbg("Update from {0} to {1}", sourceFilename, targetFilename);
 			try
 			{
 				Copy(sourceFilename, targetFilename);
-				Log.dbg("Deleting {0}", sourceFilename);
 				Delete(sourceFilename);
 				return string.Format("{0} was updated.", name);
 			}
@@ -107,7 +122,8 @@ namespace WatchDog.InstallChecker
 		private static void Delete(string filename)
 		{
 			Log.dbg("Deleting {0}", filename);
-			System.IO.File.Delete(filename);
+			if (System.IO.File.Exists(filename))
+				System.IO.File.Delete(filename);
 		}
 
 		private static string GAMEDATA = null;

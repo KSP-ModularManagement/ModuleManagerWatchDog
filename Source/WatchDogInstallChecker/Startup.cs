@@ -25,27 +25,25 @@ namespace WatchDog.InstallChecker
 	[KSPAddon(KSPAddon.Startup.Instantly, true)]
 	internal class Startup : MonoBehaviour
 	{
-		private const string MYSELF_NAME			= "Module Manager WatchDog Main Assembly";
-		private readonly string MYSELF_SOURCE_FN	= System.IO.Path.Combine("ModuleManagerWatchDog",
-														System.IO.Path.Combine("Plugins",
-															System.IO.Path.Combine("PluginData", "ModuleManagerWatchDog.dll")
-														)
-													);
-		private const string MYSELF_TARGET_FN		= "666_ModuleManagerWatchDog.dll";
-
-		private const string MML_NAME				= "Module Manager";
-		private readonly string MML_SOURCE_FN		= System.IO.Path.Combine("ModuleManager",
-														System.IO.Path.Combine("PluginData", "ModuleManager.dll")
-													);
-		private const string MML_TARGET_FN			= "ModuleManager.dll";
-
-		private const string SCALE_NAME				= "TweakScale's Scale_Redist";
-		private readonly string SCALE_SOURCE_FN		= System.IO.Path.Combine("TweakScale",
-														System.IO.Path.Combine("Plugins",
-															System.IO.Path.Combine("PluginData", "Scale_Redist.dll")
-														)
-													);
-		private const string SCALE_TARGET_FN		= "999_Scale_Redist.dll";
+		private readonly SanityLib.UpdateData[] UPDATEABLES = new SanityLib.UpdateData[] {
+				new SanityLib.UpdateData(
+					"Module Manager WatchDog Main Assembly",
+					System.IO.Path.Combine("ModuleManagerWatchDog",
+						System.IO.Path.Combine("Plugins",
+							System.IO.Path.Combine("PluginData", "ModuleManagerWatchDog.dll"))),
+					"666_ModuleManagerWatchDog.dll"),
+				new SanityLib.UpdateData(
+					"Module Manager",
+					System.IO.Path.Combine("ModuleManager",
+						System.IO.Path.Combine("PluginData", "ModuleManager.dll")),
+					"ModuleManager.dll"),
+				new SanityLib.UpdateData(
+					"TweakScale's Scale_Redist",
+					System.IO.Path.Combine("TweakScale",
+						System.IO.Path.Combine("Plugins",
+							System.IO.Path.Combine("PluginData", "Scale_Redist.dll"))),
+					"999_Scale_Redist.dll")
+			};
 
 		private void Start()
 		{
@@ -67,16 +65,13 @@ namespace WatchDog.InstallChecker
 
 			try
 			{
-				List<String> msgs = new List<string>();
-
-				String msg = SanityLib.UpdateIfNeeded(MYSELF_NAME, MYSELF_SOURCE_FN, MYSELF_TARGET_FN);
-				if (null != msg) msgs.Add(msg);
-
-				msg = SanityLib.UpdateIfNeeded(MML_NAME, MML_SOURCE_FN, MML_TARGET_FN);
-				if (null != msg) msgs.Add(msg);
-
-				msg = SanityLib.UpdateIfNeeded(SCALE_NAME, SCALE_SOURCE_FN, SCALE_TARGET_FN);
-				if (null != msg) msgs.Add(msg);
+				List<string> msgs = new List<string>();
+				string msg;
+				foreach (SanityLib.UpdateData ud in UPDATEABLES)
+				{ 
+					msg = SanityLib.UpdateIfNeeded(ud);
+					if (null != msg) msgs.Add(msg);
+				}
 
 				msg = string.Join("\n\n", msgs.ToArray());
 				if ( !string.Empty.Equals(msg) )
