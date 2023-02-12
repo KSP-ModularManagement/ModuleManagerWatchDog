@@ -1,6 +1,6 @@
 ﻿/*
 	This file is part of Watch Dog for Intestellar Redist, a component from Module Manager Watch Dog
-		© 2020-22 Lisias T : http://lisias.net <support@lisias.net>
+		©2020-2023 Lisias T : http://lisias.net <support@lisias.net>
 
 	Module Manager Watch Dog is licensed as follows:
 		* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
