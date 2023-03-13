@@ -30,7 +30,7 @@ namespace WatchDog.InstallChecker.GUI
 				() => { Application.Quit(); },
 				true
 			);
-			Log.detail("\"Your Attention Please!\" was displayed about : {0}", msg.Replace("\n"," "));
+			Log.force("\"Your Attention Please!\" was displayed about : {0}", msg.Replace("\n"," "));
 		}
 	}
 }

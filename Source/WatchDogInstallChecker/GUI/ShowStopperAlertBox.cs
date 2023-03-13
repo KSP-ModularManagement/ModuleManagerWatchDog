@@ -29,7 +29,7 @@ namespace WatchDog.InstallChecker.GUI
 				AMSG,
 				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/ModuleManager/WatchDog/KNOWN_ISSUES"); Application.Quit(); }
 			);
-			Log.detail("\"Houston, we have a Problem!\" was displayed about : {0}", msg);
+			Log.force("\"Houston, we have a Problem!\" was displayed about : {0}", msg);
 		}
 	}
 }
