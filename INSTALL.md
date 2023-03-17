@@ -17,7 +17,11 @@ The following file layout must be present after installation:
 ```
 <KSP_ROOT>
 	[GameData]
-		999_MMWD.dll
+		[ModuleManagerWatchDog]
+			CHANGE_LOG
+			ModuleManagerWatchDog.version
+			...
+		666_ModuleManagerWatchDog.dll
 		ModuleManager.dll
 		...
 	KSP.log
