@@ -43,6 +43,7 @@
     <Compile Include="GUI\ShowStopperAlertBox.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\Log.cs" />
+    <Compile Include="ErrorMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModuleManagerWatchDog\ModuleManagerWatchDog.csproj">

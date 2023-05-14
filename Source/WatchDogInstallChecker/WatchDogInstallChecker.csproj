@@ -55,6 +55,7 @@
     <Compile Include="GUI\ShowStopperAlertBox.cs" />
     <Compile Include="GUI\WarningAlertbox.cs" />
     <Compile Include="GUI\ShowRebootTheGame.cs" />
+    <Compile Include="ErrorMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Util\" />

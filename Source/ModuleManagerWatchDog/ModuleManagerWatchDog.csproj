@@ -52,6 +52,7 @@
     <Compile Include="Util\SanityLib.cs" />
     <Compile Include="Properties\LegalMamboJambo.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="ErrorMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">

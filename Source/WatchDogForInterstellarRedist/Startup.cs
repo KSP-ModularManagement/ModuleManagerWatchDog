@@ -65,17 +65,13 @@ namespace WatchDogForInterstellarRedist
 
 		private const string ASSEMBLY_NAME		= "Interstellar_Redist";
 		private const string DLL_FILENAME		= "Interstellar_Redist.dll";
-		private const string ERR_MULTIPLE_TOOL	= "There're more than one Interstellar Redist Watch Dog on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog/Plugins !";
-		private const string ERR_MISSING_DLL	= "There's no Interstellar Redist dll on this KSP installment, besides you having installed known DLL(s) that need it!!";
-		private const string ERR_MULTIPLE_DLL	= "There're more than one Interstellar Redist dll on this KSP installment! Please delete all but the GameData/Interstellar_Redist.dll one!";
-		private const string ERR_MISPLACED_DLL	= "Interstellar Redist dll <b>must be</b> directly on GameData and not inside any subfolder. Please move Interstellar_Redist.dll directly into GameData.";
 
 		private string CheckMyself()
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Namespace);
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return ERR_MULTIPLE_TOOL;
+			if (1 != loaded.Count()) return ErrorMessage.ERR_MULTIPLE_TOOL;
 			return null;
 		}
 
@@ -92,7 +88,7 @@ namespace WatchDogForInterstellarRedist
 		private string CheckRedist()
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
-			if (0 == loaded.Count()) return ERR_MISSING_DLL;
+			if (0 == loaded.Count()) return ErrorMessage.ERR_MISSING_DLL;
 			return null;
 		}
 
@@ -103,9 +99,9 @@ namespace WatchDogForInterstellarRedist
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(ASSEMBLY_NAME);
 
-			if (1 != loaded.Count()) return ERR_MULTIPLE_DLL;
+			if (1 != loaded.Count()) return ErrorMessage.ERR_MULTIPLE_DLL;
 			if (!SanityLib.CheckIsOnGameData(loaded.First().path, DLL_FILENAME))
-				return ERR_MISPLACED_DLL;
+				return ErrorMessage.ERR_MISPLACED_DLL;
 			return null;
 		}
 	}

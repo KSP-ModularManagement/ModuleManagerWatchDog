@@ -94,14 +94,12 @@ namespace WatchDog.InstallChecker
 			UnityEngine.Application.Quit();
 		}
 
-		private const string ERR_MULTIPLE_TOOL = "There're more than one WatchDog Install Checker on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog/Plugins !";
-
 		private string CheckMyself()
 		{
 			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName("WatchDogInstallChecker");
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return ERR_MULTIPLE_TOOL;
+			if (1 != loaded.Count()) return ErrorMessage.ERR_MULTIPLE_TOOL;
 			return null;
 		}
 	}

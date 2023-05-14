@@ -70,9 +70,9 @@ namespace ModuleManagerWatchDog
 #endif
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return "There're more than one MM Watch Dog on this KSP installment! Please delete all but the one you intend to use!";
+			if (1 != loaded.Count()) return ErrorMessage.ERR_MMWD_DUPLICATED;
 			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
-				return "666_ModuleManagerWatchDog.dll <b>must be</b> directly on GameData and not inside any subfolder (i.e., it must be in the same place ModuleManager.dll is). Please move 666_ModuleManagerWatchDog.dll directly into GameData.";
+				return ErrorMessage.ERR_MMWD_WRONGPLACE;
 			return null;
 		}
 
@@ -86,9 +86,9 @@ namespace ModuleManagerWatchDog
 				Log.dbg("{0} :: {1}", la.assembly.FullName, la.assembly.Location);
 #endif
 
-			if (0 == loaded.Count()) return "There's no Module Manager on this KSP installment! You need to install Module Manager!";
+			if (0 == loaded.Count()) return ErrorMessage.ERR_MM_ABSENT;
 			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
-				return "ModuleManager.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move ModuleManager.dll directly into GameData.";
+				return ErrorMessage.ERR_MM_WRONGPLACE;
 			return null;
 		}
 
@@ -102,7 +102,7 @@ namespace ModuleManagerWatchDog
 			foreach (System.Reflection.Assembly a in loaded)
 				Log.dbg("{0} :: {1}", a.FullName, a.Location);
 #endif
-			if (1 != loaded.Count()) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
+			if (1 != loaded.Count()) return ErrorMessage.ERR_MM_DOPPELGANGER;
 			return null;
 		}
 
@@ -135,7 +135,7 @@ namespace ModuleManagerWatchDog
 				||
 				(assembly.Location.EndsWith(DASHMMDLL) && !assemblyTittle.StartsWith("Module Manager /L"))
 				)
-				return "There're conflicting Module Manager versions on your instalment! You need to choose one version and remove the other(s)!";
+				return ErrorMessage.ERR_MM_CONFLICT;
 			return null;
 		}
 
@@ -157,7 +157,7 @@ namespace ModuleManagerWatchDog
 			foreach (AssemblyLoader.LoadedAssembly m in AssemblyLoader.loadedAssemblies)
 				if (ASSEMBLY_NAME.Equals(m.assembly.GetName().Name)) ++hits;
 
-			if (hits > 1) return "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
+			if (hits > 1) return ErrorMessage.ERR_MM_DOPPELGANGER;
 			return null;
 		}
 
