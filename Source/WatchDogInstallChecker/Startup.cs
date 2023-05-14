@@ -54,7 +54,7 @@ namespace WatchDog.InstallChecker
 				// Always check for being the unique Assembly loaded. This will avoid problems in the future.
 				String msg = CheckMyself();
 
-				if ( null != msg )
+				if (null != msg)
 					GUI.ShowStopperAlertBox.Show(msg);
 			}
 			catch (Exception e)
@@ -68,13 +68,13 @@ namespace WatchDog.InstallChecker
 				List<string> msgs = new List<string>();
 				string msg;
 				foreach (SanityLib.UpdateData ud in UPDATEABLES)
-				{ 
+				{
 					msg = SanityLib.UpdateIfNeeded(ud);
 					if (null != msg) msgs.Add(msg);
 				}
 
 				msg = string.Join("\n\n", msgs.ToArray());
-				if ( !string.Empty.Equals(msg) )
+				if (!string.Empty.Equals(msg))
 					GUI.ShowRebootTheGame.Show(msg);
 			}
 			catch (Exception e)
@@ -82,6 +82,16 @@ namespace WatchDog.InstallChecker
 				Log.error(e.ToString());
 				GUI.ShowStopperAlertBox.Show(e.ToString());
 			}
+		}
+
+		internal static bool quitOnDestroy = false;
+		private void OnDestroy()
+		{
+			if (!quitOnDestroy) return;
+
+			// Someone, probably a FatalError, told us to quit the game.
+			Log.force("Quitting KSP due an unrecoverable error.");
+			UnityEngine.Application.Quit();
 		}
 
 		private const string ERR_MULTIPLE_TOOL = "There're more than one WatchDog Install Checker on this KSP installment! Please delete all but the one on GameData/ModuleManagerWatchDog/Plugins !";

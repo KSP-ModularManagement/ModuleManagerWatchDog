@@ -24,6 +24,7 @@ namespace WatchDog.InstallChecker.GUI
 
 		internal static void Show(string msg)
 		{
+			Startup.quitOnDestroy = true;
 			KSPe.Common.Dialogs.WarningAlertBox.Show(
 				msg,
 				AMSG,
