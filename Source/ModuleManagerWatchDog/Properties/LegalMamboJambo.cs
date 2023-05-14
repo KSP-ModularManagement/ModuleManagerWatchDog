@@ -22,7 +22,7 @@ namespace ModuleManagerWatchDog
 	{
 		public const string Company = "L Aerospace KSP Division";
 		public const string Product = "Module Manager Watch Dog";
-		public const string Copyright = "© 2020-2021 LisiasT";
+		public const string Copyright = "© 2020-2023 LisiasT";
 		public const string Trademark = "Module Manager Watch Dog";
 	}
 }
