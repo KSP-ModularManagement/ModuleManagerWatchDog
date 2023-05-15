@@ -56,7 +56,6 @@ namespace WatchDog.ModuleManager
 				this.prefersMyFork = false;
 				r = false;
 			}
-			Log.force("**** IsValid {0}, PrefersMyFork {1}", r, this.PrefersMyFork);
 			this.IsValid = r;
 		}
 
@@ -64,7 +63,7 @@ namespace WatchDog.ModuleManager
 		{
 			if (!this.dirty) return;
 			string path = SIO.Path.Combine(ROOT, DATAFILE);
-			Log.force("Writing {0}", path);
+			Log.dbg("Writing {0}", path);
 			try
 			{
 				ConfigNode cn = new ConfigNode(NODE);
