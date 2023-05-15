@@ -29,6 +29,7 @@ namespace KSPe.UI
 		private GUIStyle text_style;
 		private int window_id;
 		private Rect windowRect;
+		private bool noCancel = false;
 
 		public void Show(string title, string msg)
 		{
@@ -45,13 +46,14 @@ namespace KSPe.UI
 			Show(title, msg, null, win_style, text_style);
 		}
 
-		public void Show(string title, string msg, Action action, GUIStyle win_style, GUIStyle text_style)
+		public void Show(string title, string msg, Action action, GUIStyle win_style, GUIStyle text_style, bool noCancel = false)
 		{
 			this.title = title;
 			this.msg = msg;
 			this.action = action;
 			this.win_style = win_style;
 			this.text_style = text_style;
+			this.noCancel = noCancel;
 			this.window_id = (int)System.DateTime.Now.Ticks;
 
 			this.windowRect = this.calculateWindow();
@@ -110,9 +112,12 @@ namespace KSPe.UI
 			{
 				if (UGUI.Button(b, "OK")) { this.action(); Destroy(this.gameObject); }
 
-				Rect b1 = new Rect(b);
-				b1.x -= b.width + spacing;
-				if (UGUI.Button(b1, "Cancel")) Destroy(this.gameObject);
+				if (!this.noCancel)
+				{
+					Rect b1 = new Rect(b);
+					b1.x -= b.width + spacing;
+					if (UGUI.Button(b1, "Cancel")) Destroy(this.gameObject);
+				}
 			}
 		}
 	}

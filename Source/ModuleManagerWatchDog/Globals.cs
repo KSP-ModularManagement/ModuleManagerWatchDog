@@ -28,7 +28,7 @@ namespace ModuleManagerWatchDog
 		private const string DATAFILE = NODE + ".cfg";
 		private readonly string ROOT = SIO.Path.Combine(KSPUtil.ApplicationRootPath, "PluginData");
 
-		internal bool IsValid;
+		internal readonly bool IsValid;
 		private bool dirty = false;
 
 		private bool prefersMyFork = false;
@@ -49,13 +49,14 @@ namespace ModuleManagerWatchDog
 			try
 			{
 				ConfigNode cn = ConfigNode.Load(path).GetNode(NODE);
-				r &= this.prefersMyFork = cn.TryGetValue("PrefersMyFork", ref this.prefersMyFork);
+				r &= cn.TryGetValue("PrefersMyFork", ref this.prefersMyFork);
 			}
 			catch (Exception)
 			{
 				this.prefersMyFork = false;
 				r = false;
 			}
+			Log.force("**** IsValid {0}, PrefersMyFork {1}", r, this.PrefersMyFork);
 			this.IsValid = r;
 		}
 

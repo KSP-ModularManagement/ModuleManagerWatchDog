@@ -18,18 +18,20 @@ using UnityEngine;
 
 namespace ModuleManagerWatchDog.GUI.Dialogs
 {
-	internal static class ShowStopperAlertBox
+	internal static class ShowRebootTheGameAlertBox
 	{
-		private static readonly string AMSG = @"to get instructions about how to Download and Install Module Manager.";
+		private static readonly string AMSG = @"close KSP and restart it so the changes take effect";
 
 		internal static void Show(string msg)
 		{
-			KSPe.Common.Dialogs.ShowStopperAlertBox.Show(
+			Startup.quitOnDestroy = true;
+			WarningAlertBox.Show(
 				msg,
 				AMSG,
-				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/ModuleManager/WatchDog/KNOWN_ISSUES"); Application.Quit(); }
+				() => { Application.Quit(); }, 
+				true
 			);
-			Log.detail("\"Houston, we have a Problem!\" was displayed about : {0}", msg);
+			Log.detail("\"Your Attention Please!\" was displayed about : {0}", msg.Replace("\n"," "));
 		}
 	}
 }

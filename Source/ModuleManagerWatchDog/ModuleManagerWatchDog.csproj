@@ -52,7 +52,11 @@
     <Compile Include="Util\SanityLib.cs" />
     <Compile Include="Properties\LegalMamboJambo.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="GUI\RebootTheGameAlertBox.cs" />
     <Compile Include="ErrorMessages.cs" />
+    <Compile Include="GUI\WarningAlertbox.cs" />
+    <Compile Include="InstallChecker.cs" />
+    <Compile Include="Util\Toolbox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">
