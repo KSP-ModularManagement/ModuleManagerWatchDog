@@ -1,5 +1,6 @@
-.vs
-bin
-obj
+/bin
+**/obj
+/*.user
 GameData
+.vs
 Source
