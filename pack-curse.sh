@@ -5,9 +5,6 @@ set -euo pipefail
 IFS=$'\n\t'
 source ./CONFIG.inc
 
-echo "Not used."
-return 0
-
 clean() {
 	rm -fR $FILE
 	if [ ! -d Archive ] ; then
