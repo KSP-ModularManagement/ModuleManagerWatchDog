@@ -16,7 +16,7 @@
 */
 using System.Diagnostics;
 
-namespace WatchDogForInterstellarRedist
+namespace WatchDog.InterstellarRedist
 {
 	public static class Log
 	{

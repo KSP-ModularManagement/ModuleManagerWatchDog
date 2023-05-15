@@ -14,7 +14,7 @@
 	<https://ksp.lisias.net/SKL-1_0.txt>.
 
 */
-namespace ModuleManagerWatchDog
+namespace WatchDog.ModuleManager
 {
 	internal static class ErrorMessage
 	{

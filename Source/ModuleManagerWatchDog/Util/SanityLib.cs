@@ -20,7 +20,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ModuleManagerWatchDog
+namespace WatchDog.ModuleManager
 {
 	public static class SanityLib
 	{

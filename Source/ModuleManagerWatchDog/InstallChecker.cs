@@ -20,7 +20,7 @@ using System.Linq;
 using System.Reflection;
 using SIO = System.IO;
 
-namespace ModuleManagerWatchDog
+namespace WatchDog.ModuleManager
 {
 	internal class InstallChecker
 	{
@@ -79,7 +79,7 @@ namespace ModuleManagerWatchDog
 
 		private string CheckMyself()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Namespace);
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Assembly.GetName().Name);
 
 #if DEBUG
 			Log.dbg("CheckMyself");

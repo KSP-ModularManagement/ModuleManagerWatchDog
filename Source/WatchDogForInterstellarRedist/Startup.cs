@@ -20,9 +20,9 @@ using System.Linq;
 
 using UnityEngine;
 
-using ModuleManagerWatchDog;
+using SanityLib = WatchDog.ModuleManager.SanityLib;
 
-namespace WatchDogForInterstellarRedist
+namespace WatchDog.InterstellarRedist
 {
 	[KSPAddon(KSPAddon.Startup.Instantly, true)]
 	internal class Startup : MonoBehaviour
@@ -68,7 +68,7 @@ namespace WatchDogForInterstellarRedist
 
 		private string CheckMyself()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Namespace);
+			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Assembly.GetName().Name);
 
 			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
 			if (1 != loaded.Count()) return ErrorMessage.ERR_MULTIPLE_TOOL;

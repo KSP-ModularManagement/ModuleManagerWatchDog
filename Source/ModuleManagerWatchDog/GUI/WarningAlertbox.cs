@@ -21,7 +21,7 @@ using KSPe.UI;
 
 using UnityEngine;
 
-namespace ModuleManagerWatchDog.GUI.Dialogs
+namespace WatchDog.ModuleManager.GUI.Dialogs
 {
 	internal class WarningAlertBox : AbstractDialog
 	{

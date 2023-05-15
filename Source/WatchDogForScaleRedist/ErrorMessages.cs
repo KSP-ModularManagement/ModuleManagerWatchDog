@@ -14,7 +14,7 @@
 	<https://ksp.lisias.net/SKL-1_0.txt>.
 
 */
-namespace WatchDogForScaleRedist
+namespace WatchDog.ScaleRedist
 {
 	public static class ErrorMessage
 	{

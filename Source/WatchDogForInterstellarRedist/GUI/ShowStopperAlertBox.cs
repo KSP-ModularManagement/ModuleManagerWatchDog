@@ -16,7 +16,7 @@
 */
 using UnityEngine;
 
-namespace WatchDogForInterstellarRedist.GUI
+namespace WatchDog.InterstellarRedist.GUI
 {
 	internal static class ShowStopperAlertBox
 	{

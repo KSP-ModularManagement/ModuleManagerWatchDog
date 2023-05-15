@@ -16,14 +16,14 @@
 */
 using UnityEngine;
 
-namespace ModuleManagerWatchDog
+namespace WatchDog.ModuleManager
 {
 	[KSPAddon(KSPAddon.Startup.Instantly, true)]
 	internal class Startup : MonoBehaviour
 	{
 		private void Start()
 		{
-			Log.force("Version {0}", Version.Text);
+			Log.force("Version {0}", ModuleManagerWatchDog.Version.Text);
 			{
 				InstallChecker ic = new InstallChecker();
 				ic.Execute();

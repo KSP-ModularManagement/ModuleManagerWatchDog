@@ -17,7 +17,7 @@
 using System;
 using SIO = System.IO;
 
-namespace ModuleManagerWatchDog
+namespace WatchDog.ModuleManager
 {
 	public class Globals
 	{

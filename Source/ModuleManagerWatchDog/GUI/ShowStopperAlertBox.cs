@@ -16,7 +16,7 @@
 */
 using UnityEngine;
 
-namespace ModuleManagerWatchDog.GUI.Dialogs
+namespace WatchDog.ModuleManager.GUI.Dialogs
 {
 	internal static class ShowStopperAlertBox
 	{

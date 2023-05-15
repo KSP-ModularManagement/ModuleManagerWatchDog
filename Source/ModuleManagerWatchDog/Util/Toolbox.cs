@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ModuleManagerWatchDog.Util
+namespace WatchDog.ModuleManager.Util
 {
 	internal static class Toolbox
 	{

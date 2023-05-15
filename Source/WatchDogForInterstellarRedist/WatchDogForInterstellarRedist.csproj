@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{580A1F8F-30A3-4ABC-A6B6-C70BF6A66BF3}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WatchDogForInterstellarRedist</RootNamespace>
+    <RootNamespace>WatchDog.InterstellarRedist</RootNamespace>
     <AssemblyName>WatchDogForInterstellarRedist</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <BaseIntermediateOutputPath>..\..\obj\WatchDogForInterstellarRedist</BaseIntermediateOutputPath>

@@ -16,7 +16,7 @@
 */
 using System.Diagnostics;
 
-namespace ModuleManagerWatchDog
+namespace WatchDog.ModuleManager
 {
 	public static class Log
 	{

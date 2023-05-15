@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2A16D384-BD05-45C2-9FAD-4CE2882854A8}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WatchDogForScaleRedist</RootNamespace>
+    <RootNamespace>WatchDog.ScaleRedist</RootNamespace>
     <AssemblyName>WatchDogForScaleRedist</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <BaseIntermediateOutputPath>..\..\obj\WatchDogForScaleRedist</BaseIntermediateOutputPath>

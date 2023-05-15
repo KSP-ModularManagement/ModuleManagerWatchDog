@@ -16,7 +16,7 @@
 */
 using System.Diagnostics;
 
-namespace WatchDogForScaleRedist
+namespace WatchDog.ScaleRedist
 {
 	public static class Log
 	{

@@ -14,7 +14,7 @@
 	<https://ksp.lisias.net/SKL-1_0.txt>.
 
 */
-namespace WatchDogForInterstellarRedist
+namespace WatchDog.InterstellarRedist
 {
 	public static class ErrorMessage
 	{

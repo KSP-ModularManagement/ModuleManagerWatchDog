@@ -16,7 +16,7 @@
 */
 using UnityEngine;
 
-namespace WatchDogForScaleRedist.GUI
+namespace WatchDog.ScaleRedist.GUI
 {
 	internal static class ShowStopperAlertBox
 	{
