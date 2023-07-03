@@ -96,10 +96,17 @@ namespace WatchDog.InstallChecker
 
 		private string CheckMyself()
 		{
-			IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Assembly.GetName().Name);
+			// The previous, minimalistic, check was hurting the update process, when a new DLL would be, in fact, in the MMWD's diretory.
+			// So we ignore these copies when the effectivelly loaded on is the one named 666_ModuleManagerWatchDog.dll .
+ 			{
+ 				IEnumerable<AssemblyLoader.LoadedAssembly> loaded = SanityLib.FetchLoadedAssembliesByName(this.GetType().Assembly.GetName().Name);
 
-			// Obviously, would be pointless to check for it not being installed! (0 == count). :)
-			if (1 != loaded.Count()) return ErrorMessage.ERR_MULTIPLE_TOOL;
+ 				// Obviously, would be pointless to check for it not being installed! (0 == count). :)
+				if (loaded.Count() > 1
+					&& !"666_ModuleManagerWatchDog.dll".Equals(System.IO.Path.GetFileName(loaded.First().assembly.Location), StringComparison.InvariantCultureIgnoreCase)
+				)
+					return ErrorMessage.ERR_MULTIPLE_TOOL;
+			}
 			return null;
 		}
 	}
