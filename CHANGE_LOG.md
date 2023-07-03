@@ -1,5 +1,9 @@
 # Module Manager Watch Dog :: Change Log
 
+* 2023-0703: 1.1.1.1 (LisiasT) for KSP >= 1.2.2
+	+ More sensible updating mechanism, coping with how Windows handles DLL files once they are loaded.
+	+ Fixes a bug on the KSPe's Install Checker/Update Tool
+		- **You need to manually remove the older `<KSP-ROOT>/GameData/666_ModuleManagerWatchDog.dll` file if existent!** 
 * 2023-0514: 1.1.1.0 (LisiasT) for KSP >= 1.2.2
 	+ Improvements on the code used to introspect the `GameData`
 		- Safer handling 1.12.x without screwing older KSPs.
