@@ -23,6 +23,8 @@ namespace WatchDog.InstallChecker
 {
 	public static class SanityLib
 	{
+		private const string DELETEME = ".delete-me";
+
 		/**
 		 * If you are interested only on assemblies that were properly loaded by KSP, this is the one you want.
 		 */
@@ -53,6 +55,11 @@ namespace WatchDog.InstallChecker
 		{
 			string sourceFilename = SIO.Path.Combine(SanityLib.CalcGameData(), ud.sourceFilename);
 			string targetFilename = SIO.Path.Combine(SanityLib.CalcGameData(), ud.targetFilename);
+
+			{ 
+				string tempFilename = targetFilename + DELETEME;
+				if (SIO.File.Exists(tempFilename)) SIO.File.Delete(tempFilename);
+			}
 
 			Log.dbg("UpdateIfNeeded from {0} to {1}", sourceFilename, targetFilename);
 			if (SIO.File.Exists(sourceFilename))
@@ -146,8 +153,18 @@ namespace WatchDog.InstallChecker
 		private static void Delete(string filename)
 		{
 			Log.dbg("Deleting {0}", filename);
-			if (SIO.File.Exists(filename))
-				SIO.File.Delete(filename);
+			if (SIO.File.Exists(filename)) try
+			{
+ 				SIO.File.Delete(filename);
+			}
+			catch (Exception e) when (e is System.UnauthorizedAccessException || e is System.Security.SecurityException)
+			{
+				// Oukey, we are in Windows and it locks the DLL file once it's loaded.
+				// But we can rename it, and delete it later.
+				string tempname = filename + DELETEME;
+				if (SIO.File.Exists(tempname)) SIO.File.Delete(tempname);
+				SIO.File.Move(filename, tempname);
+			}
 		}
 
 		private static string GAMEDATA = null;
