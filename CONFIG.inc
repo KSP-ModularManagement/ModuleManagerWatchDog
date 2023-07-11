@@ -7,7 +7,7 @@ TARGETBINDIR="$TARGETDIR/Plugins"
 PROJECTSDIR="Source/$PACKAGE/"
 VERSIONFILE="$PACKAGE.version"		
 
-DLLS="WatchDogForInterstellarRedist WatchDogForScaleRedist WatchDogInstallChecker"
+DLLS="WatchDogForInterstellarRedist WatchDogForScaleRedist WatchDogInstallChecker WatchDogPDLauncher"
 
 # PluginData DLLs
 PD_DLLS="ModuleManagerWatchDog"
