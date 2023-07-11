@@ -26,7 +26,15 @@ namespace WatchDog.PDLauncher
 			Log.force("Version {0}", ModuleManagerWatchDog.Version.Text);
 
 			if (SanityLib.IsPdLauncherRunning)
+			{
+				Log.info("PD Launcher is running! Found in {0}", SanityLib.PdLauncherPath);
+				Log.info("Trying to kill it...");
 				SanityLib.KillPdLauncher();
+				if (SanityLib.IsPdLauncherRunning)
+					Log.info("Failure. There's something different, ask for help on Forum!");
+				else
+					Log.info("Success!! Move on, nothing to see here!! :)");
+			}
 		}
 	}
 }
