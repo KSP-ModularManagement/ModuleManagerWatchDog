@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogForScaleRedist", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogInstallChecker", "Source\WatchDogInstallChecker\WatchDogInstallChecker.csproj", "{2FC6C5E5-C7C9-4830-A13E-258730F47B87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchDogPDLauncher", "Source\WatchDogPDLauncher\WatchDogPDLauncher.csproj", "{B2C95CCC-D5CE-4200-A568-CFD8D8B8B904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{2FC6C5E5-C7C9-4830-A13E-258730F47B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FC6C5E5-C7C9-4830-A13E-258730F47B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FC6C5E5-C7C9-4830-A13E-258730F47B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C95CCC-D5CE-4200-A568-CFD8D8B8B904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C95CCC-D5CE-4200-A568-CFD8D8B8B904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C95CCC-D5CE-4200-A568-CFD8D8B8B904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C95CCC-D5CE-4200-A568-CFD8D8B8B904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
