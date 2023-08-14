@@ -7,10 +7,13 @@ A Watch Dog for Module Manager.
 To install, place the GameData folder inside your Kerbal Space Program folder:
 
 * **REMOVE ANY OLD VERSIONS OF THE PRODUCT BEFORE INSTALLING**, including any other fork:
-	+ Delete `<KSP_ROOT>/GameData/999_MMWD.dll`
+	+ Delete `<KSP_ROOT>/GameData/666_ModuleManagerWatchDog.dll `
 * Extract the package's `GameData/` folder into your KSP's as follows:
-	+ `<PACKAGE>/GameData/999_MMWD.dll` --> `<KSP_ROOT>/GameData`
+	+ `<PACKAGE>/GameData/666_ModuleManagerWatchDog.dll ` --> `<KSP_ROOT>/GameData`
 		- Overwrite any preexisting file.
+	+ **NOTE**: If you are using CKAN, the following file **should not** be installed (remove it manually if needed):
+		- `<KSP_ROOT>GameData/ModuleManagerWatchDog/Plugins/WatchDogInstallChecker.dll`
+		- But if you are using CKAN, why in hell are you installing it manually? :)
 
 The following file layout must be present after installation:
 
