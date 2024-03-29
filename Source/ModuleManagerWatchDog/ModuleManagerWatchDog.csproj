@@ -57,6 +57,7 @@
     <Compile Include="GUI\WarningAlertbox.cs" />
     <Compile Include="InstallChecker.cs" />
     <Compile Include="Util\Toolbox.cs" />
+    <Compile Include="Util\SelfCleaning.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">

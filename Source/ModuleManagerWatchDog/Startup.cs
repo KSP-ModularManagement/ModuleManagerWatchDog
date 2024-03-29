@@ -25,6 +25,30 @@ namespace WatchDog.ModuleManager
 		{
 			Log.force("Version {0}", ModuleManagerWatchDog.Version.Text);
 			{
+				bool safeToKillMyself = true;
+				// Check if ModuleManager /L should be uninstalled
+				if (SelfCleaning.CheckUninstalled("ModuleManager", "ModuleManager.dll"))
+				{
+					Log.warn("ModuleManager /L's directory was removed. ModuleManagerWatchDog is removing ModuleManager /L from the Loading System, but some `*.delete-me` files may be left in your `GameData` until the next boot. Nothing bad will happen by leaving them there, however.");
+					SelfCleaning.KillThis("ModuleManager.dll");
+					safeToKillMyself = false;
+				}
+
+				// Check if ModuleManagerWatchDog should be uninstalled
+				if (SelfCleaning.CheckUninstalled("ModuleManagerWatchDog", "666_ModuleManagerWatchDog.dll"))
+				{
+					if (safeToKillMyself)
+					{
+						Log.warn("ModuleManagerWatchDog's directory was removed. The bootstrap is removing itself from the Loading System, but you may need to delete manually some `*.delete-me` files in your `GameData`. Nothing bad will happen by leaving them there, however.");
+						SelfCleaning.KillThis("666_ModuleManagerWatchDog.dll");
+					}
+					else
+						Log.warn("ModuleManagerWatchDog's directory was removed, but some housekeeping is still in progress. It will remove itself in the next boot.");
+					// We are dead. No further actions should be allowed.
+					return;
+				}
+			}
+			{
 				InstallChecker ic = new InstallChecker();
 				ic.Execute();
 			}

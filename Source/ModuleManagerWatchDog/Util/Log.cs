@@ -30,6 +30,11 @@ namespace WatchDog.ModuleManager
 			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog] INFO: " + msg, @params);
 		}
 
+		internal static void warn(string msg, params object[] @params)
+		{
+			UnityEngine.Debug.LogWarningFormat("[ModuleManagerWatchDog] WARNING: " + msg, @params);
+		}
+
 		internal static void detail(string msg, params object[] @params)
 		{
 			UnityEngine.Debug.LogFormat("[ModuleManagerWatchDog] DETAIL: " + msg, @params);
