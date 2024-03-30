@@ -1,6 +1,6 @@
 ﻿/*
 	This file is part of Module Manager Watch Dog
-		©2020-2023 Lisias T : http://lisias.net <support@lisias.net>
+		©2020-2024 Lisias T : http://lisias.net <support@lisias.net>
 
 	KSP Enhanced /L is licensed as follows:
 		* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
@@ -22,7 +22,7 @@ namespace ModuleManagerWatchDog
 	{
 		public const string Company = "L Aerospace KSP Division";
 		public const string Product = "Module Manager Watch Dog";
-		public const string Copyright = "© 2020-2023 LisiasT";
+		public const string Copyright = "©2020-2024 LisiasT";
 		public const string Trademark = "Module Manager Watch Dog";
 	}
 }
