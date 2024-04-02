@@ -1,8 +1,9 @@
 {
 	"NAME"		: "Module Manager Watch Dog",
-	"URL"		: "https://raw.githubusercontent.com/net-lisias-ksp/ModuleManagerWatchDog/master/ModuleManagerWatchDog.version",
-	"DOWNLOAD"	: "https://github.com/net-lisias-ksp/ModuleManagerWatchDog/releases",
-	"CHANGE_LOG_URL": "https://raw.githubusercontent.com/net-lisias-ksp/ModuleManagerWatchDog/master/CHANGES.md",
+	"URL"		: "https://raw.githubusercontent.com/KSP-ModularManagement/ModuleManagerWatchDog/master/ModuleManagerWatchDog.version",
+	"DOWNLOAD"	: "https://github.com/KSP-ModularManagement/ModuleManagerWatchDog/releases",
+	"CHANGE_LOG"	: "https://raw.githubusercontent.com/KSP-ModularManagement/ModuleManagerWatchDog/master/CHANGE_LOG.md",
+	"CHANGE_LOG_URL": "https://raw.githubusercontent.com/KSP-ModularManagement/ModuleManagerWatchDog/master/CHANGES.md",
 
 	"VERSION":{
 		"MAJOR":1,

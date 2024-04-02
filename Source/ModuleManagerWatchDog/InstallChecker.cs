@@ -166,7 +166,7 @@ namespace WatchDog.ModuleManager
 		//
 		// DAMN, SQUAD!!! :(
 		//
-		// See https://github.com/net-lisias-ksp/ModuleManagerWatchDog/issues/6 for details.
+		// See https://github.com/KSP-ModularManagement/ModuleManagerWatchDog/issues/6 for details.
 		//
 		private string CheckModuleManagerDoppelganger112()
 		{
