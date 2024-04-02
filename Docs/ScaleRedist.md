@@ -4,7 +4,7 @@ This is a troubleshooting list to help you on fixing your installment.
 
 If you need further help, please visit [Forum's TweakScale Thread](https://forum.kerbalspaceprogram.com/index.php?/topic/179030-*/).
 
-Alternatively, you can reach the [TweakScale's General Support Issue](https://github.com/net-lisias-ksp/TweakScale/issues/92) if you have a Github account and prefer using it.
+Alternatively, you can reach the [TweakScale's General Support Issue](https://github.com/TweakScale/TweakScale/issues/92) if you have a Github account and prefer using it.
 
 ## Known detectable problems
 
