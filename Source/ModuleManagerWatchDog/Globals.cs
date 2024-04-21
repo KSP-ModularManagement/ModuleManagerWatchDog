@@ -70,6 +70,7 @@ namespace WatchDog.ModuleManager
 				ConfigNode ccn = cn.AddNode(NODE);
 				ccn.SetValue("PrefersMyFork", this.prefersMyFork, true);
 				cn.Save(path);
+				INSTANCE = null;
 			}
 			catch (Exception e)
 			{

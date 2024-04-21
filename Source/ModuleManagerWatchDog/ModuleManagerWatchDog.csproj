@@ -58,6 +58,8 @@
     <Compile Include="InstallChecker.cs" />
     <Compile Include="Util\Toolbox.cs" />
     <Compile Include="Util\SelfCleaning.cs" />
+    <Compile Include="GUI\OptionBox.cs" />
+    <Compile Include="GUI\SelectMMForkOptionBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">

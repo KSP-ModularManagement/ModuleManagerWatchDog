@@ -34,11 +34,24 @@ namespace WatchDog.ModuleManager
 				if (null == msg)
 					msg = this.CheckModuleManager();
 
+				if (null == msg && SanityLib.IsEnforceable(1, 12))
+				{ 
+					msg = this.CheckModuleManagerConflict112();
+					if (null != msg)
+					{
+						KSPe.UI.OptionDialogBox.Option[] options = new KSPe.UI.OptionDialogBox.Option[]
+						{
+							new KSPe.UI.OptionDialogBox.Option(ErrorMessage.Conflict.OPTION_READ_MORE, () => { UnityEngine.Application.OpenURL(ErrorMessage.Conflict.URL);}, false),
+							new KSPe.UI.OptionDialogBox.Option(ErrorMessage.Conflict.OPTION_MML, () => { Globals.Instance.PrefersMyFork = true; Globals.Instance.Save(); this.HandledAutoFix(); }, true),
+							new KSPe.UI.OptionDialogBox.Option(ErrorMessage.Conflict.OPTION_MMF, () => { Globals.Instance.PrefersMyFork = false; Globals.Instance.Save(); this.HandledAutoFix(); }, true),
+						};
+						GUI.Dialogs.SelectMMForkOptionBox.Show(options);
+						return;
+					}
+				}
+
 				if (null == msg && SanityLib.IsEnforceable(1, 8))
 					 msg = this.CheckModuleManagerDoppelganger18();
-
-				if (null == msg && SanityLib.IsEnforceable(1, 12))
-					 msg = this.CheckModuleManagerConflict112();
 
 				if (null == msg && SanityLib.IsEnforceable(1, 12))
 					 msg = this.CheckModuleManagerDoppelganger112();
@@ -71,6 +84,15 @@ namespace WatchDog.ModuleManager
 				// doesn't wants to use.
 				Globals.Instance.PrefersMyFork = IsModuleManagerMyFork();
 			}
+		}
+
+		private void HandledAutoFix()
+		{
+			string msg = this.AutoFix();
+			if (null != msg)
+				GUI.Dialogs.ShowRebootTheGameAlertBox.Show(msg);
+			else
+				GUI.Dialogs.ShowStopperAlertBox.Show(msg);
 		}
 
 		private const string ASSEMBLY_NAME = "ModuleManager";
@@ -154,7 +176,7 @@ namespace WatchDog.ModuleManager
 				||
 				(assembly.Location.EndsWith(DASHMMDLL) && !assemblyTittle.StartsWith(MYFORK_ASMTITTLE))
 				)
-				return ErrorMessage.ERR_MM_CONFLICT;
+				return ErrorMessage.Conflict.ERR_MSG;
 			return null;
 		}
 

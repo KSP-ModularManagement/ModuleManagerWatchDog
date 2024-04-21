@@ -23,8 +23,17 @@ namespace WatchDog.ModuleManager
 		public static readonly string ERR_MM_ABSENT = "There's no Module Manager on this KSP installment! You need to install Module Manager!";
 		public static readonly string ERR_MM_WRONGPLACE = "ModuleManager.dll <b>must be</b> directly on GameData and not inside any subfolder. Please move ModuleManager.dll directly into GameData.";
 		public static readonly string ERR_MM_DOPPELGANGER = "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
-		public static readonly string ERR_MM_CONFLICT = "There're conflicting Module Manager versions on your instalment! You need to choose one version and remove the other(s)!";
 		public static readonly string ERR_MM_FORUMDELETED = "You had selected MM/L as preferred Module Manager, but somehow other forks were installed. They were automatically removed.";
 		public static readonly string ERR_MM_MYFORKDELETED = "You had selected Forum's as preferred Module Manager, but somehow other forks were installed. They were automatically removed.";
+
+		internal static class Conflict
+		{
+			public static readonly string TITLE = "Houston, we have a problem!";
+			public static readonly string ERR_MSG = "There're conflicting Module Manager versions on your instalment!\n\nYou need to choose the fork you want to use, the other one will be removed. Futurely, undully installed Module Managers will be automatically removed, respecting your choice.";
+			public static readonly string URL = "https://ksp.lisias.net/add-ons/ModuleManager/WatchDog/FAQ/ConflictingMM";
+			public static readonly string OPTION_READ_MORE = "Would you like to know more? (a web page will be opened)";
+			public static readonly string OPTION_MML = "Keep MM/L.";
+			public static readonly string OPTION_MMF = "Keep MM/Forum.";
+		}
 	}
 }
