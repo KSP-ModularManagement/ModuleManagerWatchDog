@@ -211,7 +211,7 @@ namespace WatchDog.ModuleManager
 			foreach(SIO.FileInfo file in Files ) try
 			{
 				if (this.IsMyFork(file)) continue;
-				SIO.File.Delete(file.FullName);
+				SelfCleaning.KillThis(file.FullName);
 				++deletedFiles;
 			}
 			catch (Exception e)
@@ -226,11 +226,11 @@ namespace WatchDog.ModuleManager
 		{
 			int deletedFiles = 0;
 			SIO.DirectoryInfo d = new SIO.DirectoryInfo(GAMEDATA);
-			SIO.FileInfo[] Files = d.GetFiles(ASSEMBLY_NAME + "*.dll"); //Getting Text files
+			SIO.FileInfo[] Files = d.GetFiles(ASSEMBLY_NAME + "*.dll"); // Getting DLL files
 			foreach(SIO.FileInfo file in Files ) try
 			{
 				if (!IsMyFork(file)) continue;
-				SIO.File.Delete(file.FullName);
+				SelfCleaning.KillThis(file.FullName);
 				++deletedFiles;
 			}
 			catch (Exception e)
