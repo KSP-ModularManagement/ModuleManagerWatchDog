@@ -36,7 +36,10 @@ namespace WatchDog.ModuleManager
 
 				if (null == msg)
 				{ 
-					msg = this.CheckModuleManagerConflict112();
+					int version = Versioning.version_major*100 + Versioning.version_minor;;
+					msg = version >= 108 ? this.CheckModuleManagerConflict108()
+							: this.CheckModuleManagerConflict()
+						;
 					if (null != msg && !Globals.Instance.IsValid)
 					{
 						KSPe.UI.OptionDialogBox.Option[] options = new KSPe.UI.OptionDialogBox.Option[]
@@ -164,11 +167,26 @@ namespace WatchDog.ModuleManager
 		private static readonly string GAMEDATAMMDLL = SIO.Path.Combine("GameData", MYFORK_FILENAME);
 		static readonly string DASHMMDLL = GAMEDATAMMDLL.Replace("GameData", "");
 		static readonly string FULLMMPATH = SIO.Path.Combine(GAMEDATA, MYFORK_FILENAME);
-		private string CheckModuleManagerConflict112()
+
+		private string CheckModuleManagerConflict()
 		{
 			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
 #if DEBUG
-			Log.dbg("CheckModuleManager112");
+			Log.dbg("CheckModuleManagerConflict");
+			foreach (System.Reflection.Assembly a in loaded)
+				Log.dbg("{0} :: {1}", a.FullName, a.Location);
+#endif
+			if (loaded.Count() > 1)
+				foreach(System.Reflection.Assembly asm in loaded) if (this.IsMyFork(new SIO.FileInfo(asm.Location)))
+					return ErrorMessage.Conflict.ERR_MSG;
+			return null;
+		}
+
+		private string CheckModuleManagerConflict108()
+		{
+			IEnumerable<System.Reflection.Assembly> loaded = SanityLib.FetchAssembliesByName(ASSEMBLY_NAME);
+#if DEBUG
+			Log.dbg("CheckModuleManagerConflict108");
 			foreach (System.Reflection.Assembly a in loaded)
 				Log.dbg("{0} :: {1}", a.FullName, a.Location);
 #endif
