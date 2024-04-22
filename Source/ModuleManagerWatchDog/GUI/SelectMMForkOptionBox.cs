@@ -20,7 +20,7 @@ namespace WatchDog.ModuleManager.GUI.Dialogs
 {
 	internal static class SelectMMForkOptionBox
 	{
-		private readonly static string AMSG = "{0}\n\n KSP will close once you make a choice, so the fix takes effect.";
+		private readonly static string AMSG = "{0}\n\nKSP will close once you make a choice, so the fix takes effect.";
 		internal static void Show(KSPe.UI.OptionDialogBox.Option[] options)
 		{
 			KSPe.UI.OptionDialogBox.Show(

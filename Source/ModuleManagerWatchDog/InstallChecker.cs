@@ -34,10 +34,10 @@ namespace WatchDog.ModuleManager
 				if (null == msg)
 					msg = this.CheckModuleManager();
 
-				if (null == msg && SanityLib.IsEnforceable(1, 12))
+				if (null == msg)
 				{ 
 					msg = this.CheckModuleManagerConflict112();
-					if (null != msg)
+					if (null != msg && !Globals.Instance.IsValid)
 					{
 						KSPe.UI.OptionDialogBox.Option[] options = new KSPe.UI.OptionDialogBox.Option[]
 						{
@@ -67,7 +67,8 @@ namespace WatchDog.ModuleManager
 
 		private void Handle(string msg)
 		{
-			if ( null != msg && Globals.Instance.IsValid)
+			Log.dbg("Handling {0}", msg);
+			if ( ErrorMessage.Conflict.ERR_MSG.Equals(msg) && Globals.Instance.IsValid)
 			{
 				string msg2 = this.AutoFix();
 				if (null != msg2)
@@ -88,6 +89,7 @@ namespace WatchDog.ModuleManager
 
 		private void HandledAutoFix()
 		{
+			Log.dbg("HandledAutoFix");
 			string msg = this.AutoFix();
 			if (null != msg)
 				GUI.Dialogs.ShowRebootTheGameAlertBox.Show(msg);
@@ -240,6 +242,19 @@ namespace WatchDog.ModuleManager
 			{
 				Log.error("Unexpected error \"{0}\"caugh by ForceMyFork while handling {1}", e.Message, file.Name);
 			}
+
+			string[] victims = new string[] {"ConfigCache", "ConfigSHA", "Physics", "TechTree" };
+			foreach(string v in victims ) try
+			{
+				string fn = SIO.Path.Combine(GAMEDATA, string.Format("{0}.{1}", ASSEMBLY_NAME, v));
+				if (SIO.File.Exists(fn)) SIO.File.Delete(fn);
+				++deletedFiles;
+			}
+			catch (Exception e)
+			{
+				Log.error("Unexpected error \"{0}\"caugh by ForceMyFork while handling {1}", e.Message, v);
+			}
+
 			Log.detail("Removing Forum's MM was {0}.", 0 == deletedFiles ? "unsucessful" : "sucessful");
 			return 0 != deletedFiles ? ErrorMessage.ERR_MM_FORUMDELETED: null;
 		}
