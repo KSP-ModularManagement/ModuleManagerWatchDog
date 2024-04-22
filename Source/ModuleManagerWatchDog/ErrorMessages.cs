@@ -25,6 +25,7 @@ namespace WatchDog.ModuleManager
 		public static readonly string ERR_MM_DOPPELGANGER = "There're more than one Module Manager on this KSP installment! Please delete all but the one you intend to use!";
 		public static readonly string ERR_MM_FORUMDELETED = "You had selected MM/L as preferred Module Manager, but somehow other forks were installed. They were automatically removed.";
 		public static readonly string ERR_MM_MYFORKDELETED = "You had selected Forum's as preferred Module Manager, but somehow other forks were installed. They were automatically removed.";
+		public static readonly string ERR_MM_MISSING_DEPENDENCIES = "You have MM installed, but not its dependencies. If using MM/L, you need to install KSPe too!"; 
 
 		internal static class Conflict
 		{

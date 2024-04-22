@@ -128,7 +128,12 @@ namespace WatchDog.ModuleManager
 				Log.dbg("{0} :: {1}", la.assembly.FullName, la.assembly.Location);
 #endif
 
-			if (0 == loaded.Count()) return ErrorMessage.ERR_MM_ABSENT;
+			if (0 == loaded.Count())
+			{
+				SIO.DirectoryInfo d = new SIO.DirectoryInfo(GAMEDATA);
+				SIO.FileInfo[] files = d.GetFiles(ASSEMBLY_NAME + "*.dll"); //Getting Text files
+				return (0 != files.Count() && this.IsMyFork(files[0])) ? ErrorMessage.ERR_MM_MISSING_DEPENDENCIES : ErrorMessage.ERR_MM_ABSENT;
+			}
 			if (!SanityLib.CheckIsOnGameData(loaded.First().path))
 				return ErrorMessage.ERR_MM_WRONGPLACE;
 			return null;
