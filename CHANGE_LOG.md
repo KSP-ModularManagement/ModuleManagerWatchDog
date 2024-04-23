@@ -1,8 +1,11 @@
 # Module Manager Watch Dog :: Change Log
 
-* 202?-????: 1.1.?.? (Lisias) for KSP >= 1.2.2
+* 2024-0423: 1.1.2.0 (LisiasT) for KSP >= 1.2.2
+	+ Adds an Option Box asking the user what would be their preferred MM Fork when a conflict is detected.
 	+ We had moved!
 		- The Official Repository is now on https://github.com/KSP-ModularManagement/ModuleManagerWatchDog
+	+ Closes issue:
+		- [#11](https://github.com/KSP-ModularManagement/ModuleManagerWatchDog/issues/11) Implement a more friendly way to allow the user to select which MM fork it wants.
 * 2024-0330: 1.1.1.2 (LisiasT) for KSP >= 1.2.2
 	+ Implements a "self-cleaning" mechanism intended to prevent the user being forced to manually delete artefacts on `GameData` once they decide to deinstall `Module Manager /L` and/or `Module Manager Watch Dog`. 
 		- Specially necessary for CurseForge users.
