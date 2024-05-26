@@ -39,7 +39,7 @@ namespace WatchDog.ScaleRedist
 
 		private System.Collections.IEnumerator Coroutine()
 		{
-			// If InstallChecker is loaded, burn some time to tive it time to do its job.
+			// If InstallChecker is loaded, burn some time to give it time to do its job.
 			for (int i = 600; i >= 0; --i)	// 
 				yield return null;
 			this.Execute();
