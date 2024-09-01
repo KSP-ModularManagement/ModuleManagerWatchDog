@@ -45,7 +45,6 @@
       <DependentUpon>Version.tt</DependentUpon>
     </Compile>
     <Compile Include="Util\Log.cs" />
-    <Compile Include="GUI\ShowStopperAlertBox.cs" />
     <Compile Include="GUI\Abstract.cs" />
     <Compile Include="GUI\MessageBox.cs" />
     <Compile Include="GUI\FatalError.cs" />
@@ -60,6 +59,7 @@
     <Compile Include="Util\SelfCleaning.cs" />
     <Compile Include="GUI\OptionBox.cs" />
     <Compile Include="GUI\SelectMMForkOptionBox.cs" />
+    <Compile Include="GUI\ShowStopperErrorBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">

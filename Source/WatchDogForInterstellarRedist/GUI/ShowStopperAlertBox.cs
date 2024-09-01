@@ -24,7 +24,7 @@ namespace WatchDog.InterstellarRedist.GUI
 
 		internal static void Show(string msg)
 		{
-			KSPe.Common.Dialogs.ShowStopperAlertBox.Show(
+			KSPe.Common.Dialogs.ShowStopperErrorBox.Show(
 				msg,
 				AMSG,
 				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/WatchDog/InterstellarRedist"); Application.Quit(); }

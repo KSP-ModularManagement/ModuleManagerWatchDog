@@ -20,7 +20,7 @@ using KSPe.UI;
 
 namespace KSPe.Common.Dialogs
 {
-	public class ShowStopperAlertBox : AbstractDialog
+	public class ShowStopperErrorBox : AbstractDialog
 	{
 		private static readonly string aMSG = "close KSP and then fix the problem described above";
 
@@ -39,7 +39,7 @@ Backup everything *NOW* if you choose to ignore this message and proceed.";
 
 		public static void Show(string errorMessage, string actionMessage, Action lambda)
 		{
-			GameObject go = new GameObject("KSPe.Common.Diallgs.ShowStopperAlertBox");
+			GameObject go = new GameObject("KSPe.Common.Diallgs.ShowStopperErrorBox");
 			MessageBox dlg = go.AddComponent<MessageBox>();
 
 			//GUIStyle win = new GUIStyle(HighLogic.Skin.window)

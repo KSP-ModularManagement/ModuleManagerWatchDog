@@ -64,7 +64,7 @@ namespace WatchDog.ModuleManager
 			catch (Exception e)
 			{
 				Log.error(e.ToString());
-				GUI.Dialogs.ShowStopperAlertBox.Show(e.ToString());
+				GUI.Dialogs.ShowStopperErrorBox.Show(e.ToString());
 			}
 		}
 
@@ -77,10 +77,10 @@ namespace WatchDog.ModuleManager
 				if (null != msg2)
 					GUI.Dialogs.ShowRebootTheGameAlertBox.Show(msg2);
 				else
-					GUI.Dialogs.ShowStopperAlertBox.Show(msg);
+					GUI.Dialogs.ShowStopperErrorBox.Show(msg);
 			}
 			else if (null != msg)
-				GUI.Dialogs.ShowStopperAlertBox.Show(msg);
+				GUI.Dialogs.ShowStopperErrorBox.Show(msg);
 			else if (!Globals.Instance.IsValid)
 			{ 
 				// If we get here, we have a sane installment. Let's remember how the user wants his installment, so
@@ -97,7 +97,7 @@ namespace WatchDog.ModuleManager
 			if (null != msg)
 				GUI.Dialogs.ShowRebootTheGameAlertBox.Show(msg);
 			else
-				GUI.Dialogs.ShowStopperAlertBox.Show(msg);
+				GUI.Dialogs.ShowStopperErrorBox.Show(msg);
 		}
 
 		private const string ASSEMBLY_NAME = "ModuleManager";

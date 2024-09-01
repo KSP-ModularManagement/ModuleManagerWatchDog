@@ -18,13 +18,13 @@ using UnityEngine;
 
 namespace WatchDog.ModuleManager.GUI.Dialogs
 {
-	internal static class ShowStopperAlertBox
+	internal static class ShowStopperErrorBox
 	{
 		private static readonly string AMSG = @"to get instructions about how to Download and Install Module Manager.";
 
 		internal static void Show(string msg)
 		{
-			KSPe.Common.Dialogs.ShowStopperAlertBox.Show(
+			KSPe.Common.Dialogs.ShowStopperErrorBox.Show(
 				msg,
 				AMSG,
 				() => { Application.OpenURL("https://ksp.lisias.net/add-ons/ModuleManager/WatchDog/KNOWN_ISSUES"); Application.Quit(); }
